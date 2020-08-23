@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Yang';
+  src: url('../../source/font/Yang-Medium.TTF') format('truetype');
+}
+#test-p {
+  font-family: 'Yang';
+  color: pink;
+}
