@@ -17,20 +17,3 @@ import App from './App';
 
 const app = document.getElementById('App');
 app ? ReactDOM.render(<App />, app) : false;
-
-// const render = Component => {
-//   const app = document.getElementById("App");
-//   app? ReactDOM.render(
-//         <AppContainer>
-//           <Component />
-//         </AppContainer>,
-//         app
-//       ): false;
-// };
-// render(App);
-
-// if (module.hot) {
-//   module.hot.accept("./App.jsx", () => {
-//     render();
-//   });
-// }

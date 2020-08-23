@@ -12,9 +12,6 @@ module.exports = {
    */
   // devtool: "eval-source-map",
 
-  // 入口文件
-  // entry: ['react-hot-loader/patch', __dirname + "/src/index.js"],
-
   // 出口文件
   output: {
     path: `${__dirname}/dist`,
@@ -36,9 +33,6 @@ module.exports = {
           {
             loader: 'babel-loader',
           },
-          // {
-          //   loader: "source-map-loader"
-          // }
         ],
       },
 
@@ -52,7 +46,7 @@ module.exports = {
         ],
       },
 
-      // css与css module处理
+      // css与css module处理(已按照需求分别配置到dev、prod)
       // 配合react-hot-loader，
       // dev与prod中对CSS处理的不同：1.css module的hash处理 2.样式是否写于js之中，配合react-hot-loader
       // {
@@ -104,9 +98,6 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/i,
         use: [
-          // {
-          //   loader: "file-loader"
-          // },
           {
             loader: 'url-loader', // 需要npm安装file-loader，会自动配合file-loader，但use中不需要写
             options: {

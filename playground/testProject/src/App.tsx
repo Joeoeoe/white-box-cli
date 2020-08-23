@@ -1,9 +1,7 @@
 import { hot } from 'react-hot-loader/root'; // 热替换
 import React from 'react';
 import './App.css';
-import TemplateCom from './components/TestCom';
-import TsTestCom from './components/TsCom';
-import PureTsCom from './components/PureTsCom';
+import TestCom from './components/TestCom';
 
 function App() {
   const a = 1,
@@ -11,9 +9,7 @@ function App() {
   const arr = ['ABCDEFG'];
   return (
     <div>
-      <TemplateCom />
-      <TsTestCom compiler='TypeScript' framework='React' />
-      <PureTsCom />
+      <TestCom />
     </div>
   );
 }
