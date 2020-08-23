@@ -18,6 +18,12 @@ ts-react-cli  init  [options]  <app-name>
 ```
 
 
+# 目录结构
+* bin: 执行脚本
+* create: 文件生成
+* util: 单元方法
+* playground: 测试
+
 # 生成项目npm命令
 * dev: 进入开发模式
 * build: 打包
