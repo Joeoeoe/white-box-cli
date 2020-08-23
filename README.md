@@ -8,7 +8,7 @@ ts-react项目脚手架
 * Typescript
 * React及其HMR
 * ESLint
-* Prettier（已整合入ESLint -fix，在vscode下，保存时会自动格式化代码）
+* Prettier（已整合入ESLint -fix，由于会生成.vscode/settings.json配置文件，vscode下保存时会自动格式化代码）
 * CSS、Less及其Module
 
 npm命令:
