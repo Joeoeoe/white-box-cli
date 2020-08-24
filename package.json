@@ -1,7 +1,7 @@
 {
-  "name": "ts-react-cli",
+  "name": "@jonithan/ts-react-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "ts-react项目脚手架",
   "main": "index.js",
   "bin": {
     "ts-react-cli": "bin/ts-react-cli.js"
@@ -15,5 +15,16 @@
   "dependencies": {
     "commander": "^6.0.0",
     "mkdirp": "^1.0.4"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joeoeoe/ts-react-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Joeoeoe/ts-react-cli/issues"
+  },
+  "homepage": "https://github.com/Joeoeoe/ts-react-cli#readme"
 }
