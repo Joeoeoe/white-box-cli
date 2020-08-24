@@ -22,3 +22,9 @@ ts-react-cli  init  [options]  <app-name>
 * create: 文件生成
 * util: 单元方法
 * playground: 测试
+
+
+# TODOList
+* 自定义端口支持
+* init进度完善、脚手架提示完善
+* 文档编写
