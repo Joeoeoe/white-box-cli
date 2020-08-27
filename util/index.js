@@ -33,10 +33,24 @@ const mkDir = function (path) {
     })
 };
 
+const parseCmd = function (cmd) {
+    const optionsArray = cmd.options;
+    const optionsObj = {};
+    const args = cmd.args;
+
+    for (let i = 0; i < optionsArray.length; i++) {
+        const optionItem = optionsArray[i];
+        const longFlag = optionItem.long.replace(/^--/, '');
+        optionsObj[longFlag] = args[i];
+    }
+
+    return optionsObj;
+}
 
 module.exports = {
     readFile,
     writeFile,
     readDir,
     mkDir,
+    parseCmd,
 }
