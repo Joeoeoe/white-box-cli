@@ -1,4 +1,4 @@
-const {writeFile} = require('../util/index');
+const {writeFile} = require('../../util');
 const path = require('path');
 
 module.exports = async function (name, filePath) {

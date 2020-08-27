@@ -52,5 +52,5 @@ module.exports = {
     writeFile,
     readDir,
     mkDir,
-    parseCmd,
+    parseCmd
 }
