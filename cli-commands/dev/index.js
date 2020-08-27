@@ -15,6 +15,8 @@ module.exports = function (optionObj, devWebpackPath) {
     },
   });
 
+  console.log(devServerOptions);
+
   const server = new WebpackDevServer(compiler, devServerOptions);
 
   server.listen(8080, "127.0.0.1", () => {
