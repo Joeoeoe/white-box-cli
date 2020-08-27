@@ -6,4 +6,5 @@ module.exports = {
   jsxSingleQuote: true, //jsx使用单引号
   jsxBracketSameLine: true, // jsx尖括号位置
   printWidth: 120, //单行最大长度
+  endOfLine: 'auto', //解决CR、LF问题
 };
