@@ -2,7 +2,7 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const commonWebpack = require('./webpack.common');
 
-module.exports = merge.smart(commonWebpack, {
+module.exports = merge.smart(commonWebpack, { 
   mode: 'development',
   entry: ['react-hot-loader/patch', `${__dirname}/src/index.js`],
   output: {
