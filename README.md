@@ -26,6 +26,7 @@ ts-react-cli  init  [options]  <app-name>
 
 # TODOList
 * 自定义端口支持 √
-* init进度完善 ⏰
+* init进度完善 √
+* npx执行 ⏰
 * 脚手架提示完善
 * 文档编写
