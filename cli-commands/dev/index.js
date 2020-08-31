@@ -4,7 +4,7 @@ const path = require("path");
 const ora = require('ora');
 const chalk = require('chalk');
 const { DEV_SERVER_DEFAULT } = require("./defaultConfig");
-
+const log = console.log;
 
 
 // 清除值为undefined的key
@@ -34,9 +34,15 @@ module.exports = function (cliOption, devWebpackPath) {
   // 端口
   const port = devServerPbj["port"];
 
+
+  // TODO编译完成的打包
   WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
   const compiler = Webpack(config);
-  
+  compiler.hooks.done.tap('test', () => {
+    log();
+    spinner.succeed(`Compiled succeed! Starting server on ${chalk.blueBright.bold('http://localhost:' + port + '/')}`)
+  })
+
   const server = new WebpackDevServer(compiler, devServerPbj);
 
 
