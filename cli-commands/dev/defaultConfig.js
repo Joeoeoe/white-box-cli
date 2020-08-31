@@ -6,7 +6,7 @@ const DEV_SERVER_DEFAULT = {
     colors: true,
     cached: false,
     cachedAssets: false,
-  }
+  },
 };
 
 module.exports = {

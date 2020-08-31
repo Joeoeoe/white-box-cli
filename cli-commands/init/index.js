@@ -4,7 +4,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const copyDir = require("../../util/copyDir");
 const { writeFile } = require("../../util");
-
+const log = console.log;
 
 
 module.exports = function (name) {
@@ -30,7 +30,11 @@ module.exports = function (name) {
         JSON.stringify(packageJson, null, 2)
       );
 
+      // TODO 思考init时要怎么做，因为推荐本地安装使用
       spinner.succeed('创建成功');
+      log(`cd ${name}`);
+      log(`npm i`)
+      log(`npm run dev ${chalk.magenta('or')} ts-react-cli dev`);
     }
   });
 };
