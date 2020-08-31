@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const WebpackBar = require('webpackbar');
 
 module.exports = {
   /**
@@ -167,6 +168,9 @@ module.exports = {
     }),
     // 清除上一次build的文件
     new CleanWebpackPlugin(),
+
+    // webpack打包进度条
+    new WebpackBar(),
   ],
 
   resolve: {

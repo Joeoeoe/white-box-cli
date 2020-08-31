@@ -1,5 +1,5 @@
 {
-  "name": "react-webpack-train",
+  "name": "react-webpack-template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -54,7 +54,8 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpackbar": "^4.0.0"
   },
   "dependencies": {
     "core-js": "^3.6.5",
