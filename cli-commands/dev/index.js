@@ -25,7 +25,6 @@ module.exports = function (cliOption, devWebpackPath) {
   );
   config.devServer = devServerPbj;
 
-  console.log(devServerPbj);
   // 端口
   const port = devServerPbj["port"];
 
