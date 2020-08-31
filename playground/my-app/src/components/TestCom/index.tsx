@@ -23,7 +23,7 @@ const TestCom: React.FC<any> = function () {
       <img src={testSmallImg} />
       <hr />
 
-      <h1>热重载AAAAAAAAAAAAAA</h1>
+      <h1>热重载测试</h1>
       <button
         onClick={() => {
           setNumber(number + 1);
