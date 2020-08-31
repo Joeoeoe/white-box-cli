@@ -1,7 +1,11 @@
 const Webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const path = require("path");
+const ora = require('ora');
+const chalk = require('chalk');
 const { DEV_SERVER_DEFAULT } = require("./defaultConfig");
+
+
 
 // 清除值为undefined的key
 const cleanOption = function (option) {
@@ -15,6 +19,8 @@ const cleanOption = function (option) {
 };
 
 module.exports = function (cliOption, devWebpackPath) {
+  const spinner = ora('构建中').start();
+
   // 配置来源：webpack.dev.js与脚手架输入及部分默认
   // 对于各配置，优先级为  默认 < dev.js配置 < cli输入
   const config = require(devWebpackPath);
@@ -30,7 +36,9 @@ module.exports = function (cliOption, devWebpackPath) {
 
   WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
   const compiler = Webpack(config);
+  
   const server = new WebpackDevServer(compiler, devServerPbj);
+
 
   server.listen(port, "127.0.0.1", () => {
     console.log(`Starting server on http://localhost:${port}`);
