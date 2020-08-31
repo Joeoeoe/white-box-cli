@@ -31,10 +31,10 @@ module.exports = function (name) {
       );
 
       // TODO 思考init时要怎么做，因为推荐本地安装使用
-      spinner.succeed('创建成功');
-      log(`cd ${name}`);
-      log(`npm i`)
-      log(`npm run dev ${chalk.magenta('or')} ts-react-cli dev`);
+      spinner.succeed('创建成功, 接下来启动项目: ');
+      log(`  ${chalk.greenBright.bold('cd')} ${name}`);
+      log(`  npm i`)
+      log(`  npm run dev ${chalk.magenta('or')} ts-react-cli dev`);
     }
   });
 };
