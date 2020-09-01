@@ -34,9 +34,9 @@ ts-react-cli  init  [options]  <app-name>
 - 自定义端口支持 √
 - init 进度完善 √
 - npx 执行 √
+- 脚手架 typescript 改写,学习 webpack 的做法
 - 脚手架报错机制
 - 脚手架提示完善
 - template 项目 typescript 本地安装
-- 脚手架 typescript 改写,学习 webpack 的做法
 - upload 至服务器
 - 文档编写
