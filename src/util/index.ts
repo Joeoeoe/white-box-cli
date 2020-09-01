@@ -2,7 +2,7 @@ import fs from 'fs';
 import Result from './Result';
 
 export const readFile = function (path:string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Result>((resolve, reject) => {
         fs.readFile(path, (err, data) => {
             resolve(new Result(data, err))
         })
@@ -10,15 +10,15 @@ export const readFile = function (path:string) {
 };
 
 export const writeFile = function (path:string, data) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Result>((resolve, reject) => {
         fs.writeFile(path, data, function (err) {
-            resolve(new Result(data, err))
+            resolve(new Result(true, err))
         })
     })
 };
 
 export const readDir = function (path) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Result>((resolve, reject) => {
         fs.readdir(path, function (err, files) {
             resolve(new Result(files, err))
         })
@@ -26,7 +26,7 @@ export const readDir = function (path) {
 };
 
 export const mkDir = function (path) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Result>((resolve, reject) => {
         fs.mkdir(path, function (err) {
             resolve(new Result(true, err));
         })

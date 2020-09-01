@@ -1,13 +1,14 @@
-const path = require("path");
-const mkdirp = require("mkdirp"); //使用mkdirp包，可以避免一级一级创建目录
-const ora = require('ora');
-const chalk = require('chalk');
-const copyDir = require("../../util/copyDir");
-const { writeFile } = require("../../util");
+import path from 'path';
+import mkdirp from 'mkdirp';//使用mkdirp包，可以避免一级一级创建目录
+import ora from 'ora';
+import chalk from 'chalk';
+import copyDir from '../../util/copyDir';
+import { writeFile } from '../../util';
+
+
 const log = console.log;
 
-
-module.exports = function (name) {
+export default function init (name) {
   const spinner = ora('创建中，请稍后').start();
 
   // process.cwd()获取工作区目录

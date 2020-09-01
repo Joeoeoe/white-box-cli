@@ -11,9 +11,11 @@ program.version(version, "-v, --version");
 program
   .command("init <app-name>")
   .description("使用 ts-react-cli 初始化项目")
-  .action((name:string) => {
-    const init = require("../cli-commands/init");
+  .action(async (name:string) => {
+    const init = await import("./cli-commands/init");
 
+    console.log(init);
+    // TODO:不知道typeof啥意思，对typescript还不熟悉。。。
     init(name);
   });
 
