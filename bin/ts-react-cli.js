@@ -12,6 +12,7 @@ program
   .description("使用 ts-react-cli 初始化项目")
   .action((name) => {
     const init = require("../cli-commands/init");
+    
     init(name);
   });
 
