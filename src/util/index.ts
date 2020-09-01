@@ -1,7 +1,7 @@
-const fs = require('fs');
-const Result = require('./Result');
+import fs from 'fs';
+import Result from './Result';
 
-const readFile = function (path) {
+export const readFile = function (path:string) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, (err, data) => {
             resolve(new Result(data, err))
@@ -9,7 +9,7 @@ const readFile = function (path) {
     });
 };
 
-const writeFile = function (path, data) {
+export const writeFile = function (path:string, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path, data, function (err) {
             resolve(new Result(data, err))
@@ -17,7 +17,7 @@ const writeFile = function (path, data) {
     })
 };
 
-const readDir = function (path) {
+export const readDir = function (path) {
     return new Promise((resolve, reject) => {
         fs.readdir(path, function (err, files) {
             resolve(new Result(files, err))
@@ -25,7 +25,7 @@ const readDir = function (path) {
     })
 };
 
-const mkDir = function (path) {
+export const mkDir = function (path) {
     return new Promise((resolve, reject) => {
         fs.mkdir(path, function (err) {
             resolve(new Result(true, err));
@@ -33,7 +33,7 @@ const mkDir = function (path) {
     })
 };
 
-const parseCmd = function (cmd) {
+export const parseCmd = function (cmd) {
     const optionsArray = cmd.options;
     const optionsObj = {};
     const args = cmd.args;
@@ -45,12 +45,4 @@ const parseCmd = function (cmd) {
     }
 
     return optionsObj;
-}
-
-module.exports = {
-    readFile,
-    writeFile,
-    readDir,
-    mkDir,
-    parseCmd
 }

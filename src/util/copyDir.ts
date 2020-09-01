@@ -1,7 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const Result = require('./Result');
-const { readFile, writeFile, readDir, mkDir } = require('./index');
+
+import fs from 'fs';
+import path from 'path';
+import Result from './Result';
+import { readFile, writeFile, readDir, mkDir } from './index';
 
 const isDirFun = function (path) {
     return new Promise((resolve, reject) => {

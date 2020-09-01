@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/Joeoeoe/ts-react-cli#readme",
   "devDependencies": {
+    "typescript": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-dev-server": "^3.11.0"
   }
