@@ -1,7 +1,7 @@
 const ora = require("ora");
 const chalk = require("chalk");
 
-class TipsObj {
+class TipObj {
   constructor() {
     this.spinner = ora();
   }
