@@ -17,7 +17,7 @@ export const writeFile = function (path:string, data) {
     })
 };
 
-export const readDir = function (path) {
+export const readDir = function (path:string) {
     return new Promise<Result>((resolve, reject) => {
         fs.readdir(path, function (err, files) {
             resolve(new Result(files, err))
@@ -25,7 +25,7 @@ export const readDir = function (path) {
     })
 };
 
-export const mkDir = function (path) {
+export const mkDir = function (path:string) {
     return new Promise<Result>((resolve, reject) => {
         fs.mkdir(path, function (err) {
             resolve(new Result(true, err));

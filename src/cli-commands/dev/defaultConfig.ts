@@ -1,4 +1,4 @@
-const DEV_SERVER_DEFAULT = {
+export const DEV_SERVER_DEFAULT = {
   publicPath: "/",
   stats: {
     modules: false,
@@ -6,8 +6,4 @@ const DEV_SERVER_DEFAULT = {
     cached: false,
     cachedAssets: false,
   },
-};
-
-module.exports = {
-  DEV_SERVER_DEFAULT,
 };

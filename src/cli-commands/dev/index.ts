@@ -1,11 +1,11 @@
-const Webpack = require("webpack");
-const WebpackDevServer = require("webpack-dev-server");
-const path = require("path");
-const ora = require('ora');
-const chalk = require('chalk');
-const { DEV_SERVER_DEFAULT } = require("./defaultConfig");
-const log = console.log;
+import Webpack from "webpack";
+import WebpackDevServer from "webpack-dev-server";
+import path from "path";
+import ora from "ora";
+import chalk from "chalk";
+import { DEV_SERVER_DEFAULT } from "./defaultConfig";
 
+const log = console.log;
 
 // 清除值为undefined的key
 const cleanOption = function (option) {
@@ -18,8 +18,8 @@ const cleanOption = function (option) {
   return cleanedOption;
 };
 
-module.exports = function (cliOption, devWebpackPath) {
-  const spinner = ora('构建中').start();
+export default function dev(cliOption, devWebpackPath: string) {
+  const spinner = ora("构建中").start();
 
   // 配置来源：webpack.dev.js与脚手架输入及部分默认
   // 对于各配置，优先级为  默认 < dev.js配置 < cli输入
@@ -34,19 +34,21 @@ module.exports = function (cliOption, devWebpackPath) {
   // 端口
   const port = devServerPbj["port"];
 
-
   // TODO编译完成的打包
   WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
   const compiler = Webpack(config);
-  compiler.hooks.done.tap('test', () => {
+  compiler.hooks.done.tap("test", () => {
     log();
-    spinner.succeed(`Compiled succeed! Starting server on ${chalk.blueBright.bold('http://localhost:' + port + '/')}`)
-  })
+    spinner.succeed(
+      `Compiled succeed! Starting server on ${chalk.blueBright.bold(
+        "http://localhost:" + port + "/"
+      )}`
+    );
+  });
 
   const server = new WebpackDevServer(compiler, devServerPbj);
-
 
   server.listen(port, "127.0.0.1", () => {
     console.log(`Starting server on http://localhost:${port}`);
   });
-};
+}
