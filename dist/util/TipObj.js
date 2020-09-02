@@ -1,8 +1,12 @@
-const ora = require("ora");
-const chalk = require("chalk");
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ora_1 = __importDefault(require("ora"));
 class TipObj {
     constructor() {
-        this.spinner = ora();
+        this.spinner = ora_1.default();
     }
     loading(text) {
         const spinner = this.spinner;
@@ -25,4 +29,4 @@ class TipObj {
         spinner.stop();
     }
 }
-module.exports = TipsObj;
+exports.default = TipObj;

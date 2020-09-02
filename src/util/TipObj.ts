@@ -1,7 +1,7 @@
 import ora, { Ora } from "ora";
 
 class TipObj {
-  spinner: Ora;
+  private spinner: Ora;
   constructor() {
     this.spinner = ora();
   }
