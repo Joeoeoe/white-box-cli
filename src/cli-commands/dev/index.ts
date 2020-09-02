@@ -1,8 +1,8 @@
 import Webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
-import ora from "ora";
 import chalk from "chalk";
 import { DEV_SERVER_DEFAULT } from "./defaultConfig";
+import TipObj from "../../util/TipObj";
 
 const log = console.log;
 
@@ -18,7 +18,9 @@ const cleanOption = function (option) {
 };
 
 export function dev(cliOption, devWebpackPath: string) {
-  const spinner = ora("构建中").start();
+  const tip = new TipObj();
+
+  tip.loading('构建中');
 
   // 配置来源：webpack.dev.js与脚手架输入及部分默认
   // 对于各配置，优先级为  默认 < dev.js配置 < cli输入
@@ -35,14 +37,15 @@ export function dev(cliOption, devWebpackPath: string) {
 
   WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
   const compiler = Webpack(config);
-  compiler.hooks.done.tap("test", () => {
+  compiler.hooks.done.tap("done", () => {
     log();
-    spinner.succeed(
-      `Compiled succeed! Starting server on ${chalk.blueBright.bold(
-        "http://localhost:" + port + "/"
-      )}`
-    );
+    tip.success(`构建成功! ${chalk.blueBright.bold(
+      "http://localhost:" + port + "/"
+    )}`);
   });
+  compiler.hooks.failed.tap('failed', (error) => {
+    tip.fail(error.message);
+  })
 
   const server = new WebpackDevServer(compiler, devServerPbj);
 
