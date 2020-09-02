@@ -28,4 +28,14 @@ program
     dev(optionObj, devWebpackPath);
   });
 
+program
+  .command("build")
+  .description("打包应用")
+  .action(async () => {
+    const prodWebpackPath = path.join(process.cwd(), "webpack.prod.js");
+    const { build } = await import("./cli-commands/build");
+
+    build(prodWebpackPath);
+  });
+
 program.parse(process.argv);

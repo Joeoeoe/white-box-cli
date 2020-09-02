@@ -54,4 +54,12 @@ commander_1.program
     const { dev } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/dev")));
     dev(optionObj, devWebpackPath);
 }));
+commander_1.program
+    .command("build")
+    .description("打包应用")
+    .action(() => __awaiter(void 0, void 0, void 0, function* () {
+    const prodWebpackPath = path_1.default.join(process.cwd(), "webpack.prod.js");
+    const { build } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/build")));
+    build(prodWebpackPath);
+}));
 commander_1.program.parse(process.argv);

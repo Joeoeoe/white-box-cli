@@ -21,14 +21,14 @@ const copyDir_1 = __importDefault(require("../../util/copyDir"));
 const util_1 = require("../../util");
 const log = console.log;
 function init(name) {
-    const spinner = ora_1.default('创建中，请稍后').start();
+    const spinner = ora_1.default("创建中，请稍后").start();
     // process.cwd()获取工作区目录
     const projectDir = path_1.default.join(process.cwd(), name); // 项目创建路径
     const sourceDir = path_1.default.join(__dirname, "../../../template"); // 模板文件路径
     console.log(sourceDir);
     mkdirp_1.default(projectDir).then((made) => __awaiter(this, void 0, void 0, function* () {
         if (made === undefined) {
-            spinner.fail('创建失败，存在同名目录');
+            spinner.fail("创建失败，存在同名目录");
         }
         else {
             // copy 模板文件
@@ -38,12 +38,11 @@ function init(name) {
             const packageJson = require(packageJsonPath);
             packageJson.name = name;
             const writePackageJsonRes = yield util_1.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
-            spinner.succeed('创建成功, 接下来启动项目: ');
-            log(`  ${chalk_1.default.greenBright.bold('cd')} ${name}`);
+            spinner.succeed("创建成功, 接下来启动项目: ");
+            log(`  ${chalk_1.default.greenBright.bold("cd")} ${name}`);
             log(`  npm i`);
-            log(`  npm run dev ${chalk_1.default.magenta('or')} ts-react-cli dev`);
+            log(`  npm run dev ${chalk_1.default.magenta("or")} ts-react-cli dev`);
         }
     }));
 }
 exports.init = init;
-;
