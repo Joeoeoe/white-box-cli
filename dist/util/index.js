@@ -1,34 +1,40 @@
-const fs = require('fs');
-const Result = require('./Result');
-const readFile = function (path) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseCmd = exports.mkDir = exports.readDir = exports.writeFile = exports.readFile = void 0;
+const fs_1 = __importDefault(require("fs"));
+const Result_1 = __importDefault(require("./Result"));
+exports.readFile = function (path) {
     return new Promise((resolve, reject) => {
-        fs.readFile(path, (err, data) => {
-            resolve(new Result(data, err));
+        fs_1.default.readFile(path, (err, data) => {
+            resolve(new Result_1.default(data, err));
         });
     });
 };
-const writeFile = function (path, data) {
+exports.writeFile = function (path, data) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(path, data, function (err) {
-            resolve(new Result(data, err));
+        fs_1.default.writeFile(path, data, function (err) {
+            resolve(new Result_1.default(true, err));
         });
     });
 };
-const readDir = function (path) {
+exports.readDir = function (path) {
     return new Promise((resolve, reject) => {
-        fs.readdir(path, function (err, files) {
-            resolve(new Result(files, err));
+        fs_1.default.readdir(path, function (err, files) {
+            resolve(new Result_1.default(files, err));
         });
     });
 };
-const mkDir = function (path) {
+exports.mkDir = function (path) {
     return new Promise((resolve, reject) => {
-        fs.mkdir(path, function (err) {
-            resolve(new Result(true, err));
+        fs_1.default.mkdir(path, function (err) {
+            resolve(new Result_1.default(true, err));
         });
     });
 };
-const parseCmd = function (cmd) {
+exports.parseCmd = function (cmd) {
     const optionsArray = cmd.options;
     const optionsObj = {};
     const args = cmd.args;
@@ -38,11 +44,4 @@ const parseCmd = function (cmd) {
         optionsObj[longFlag] = args[i];
     }
     return optionsObj;
-};
-module.exports = {
-    readFile,
-    writeFile,
-    readDir,
-    mkDir,
-    parseCmd
 };

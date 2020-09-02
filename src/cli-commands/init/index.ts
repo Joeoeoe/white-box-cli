@@ -8,7 +8,7 @@ import { writeFile } from '../../util';
 
 const log = console.log;
 
-export default function init (name) {
+export  function init (name) {
   const spinner = ora('创建中，请稍后').start();
 
   // process.cwd()获取工作区目录
@@ -31,7 +31,6 @@ export default function init (name) {
         JSON.stringify(packageJson, null, 2)
       );
 
-      // TODO 思考init时要怎么做，因为推荐本地安装使用
       spinner.succeed('创建成功, 接下来启动项目: ');
       log(`  ${chalk.greenBright.bold('cd')} ${name}`);
       log(`  npm i`)

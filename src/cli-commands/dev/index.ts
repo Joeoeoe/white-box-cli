@@ -18,7 +18,7 @@ const cleanOption = function (option) {
   return cleanedOption;
 };
 
-export default function dev(cliOption, devWebpackPath: string) {
+export function dev(cliOption, devWebpackPath: string) {
   const spinner = ora("构建中").start();
 
   // 配置来源：webpack.dev.js与脚手架输入及部分默认
@@ -34,7 +34,6 @@ export default function dev(cliOption, devWebpackPath: string) {
   // 端口
   const port = devServerPbj["port"];
 
-  // TODO编译完成的打包
   WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
   const compiler = Webpack(config);
   compiler.hooks.done.tap("test", () => {

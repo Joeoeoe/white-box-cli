@@ -1,0 +1,1 @@
+require("../dist/ts-react-cli.js");
