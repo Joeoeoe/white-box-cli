@@ -16,7 +16,7 @@ export function init(name) {
   // process.cwd()获取工作区目录
   const projectDir = path.join(process.cwd(), name); // 项目创建路径
   const sourceDir = path.join(__dirname, "../../../template"); // 模板文件路径
-  console.log(sourceDir);
+  
   mkdirp(projectDir).then(async (made) => {
     try {
       if (made === undefined) {
