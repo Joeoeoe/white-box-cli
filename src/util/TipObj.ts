@@ -1,7 +1,7 @@
-const ora = require("ora");
-const chalk = require("chalk");
+import ora, { Ora } from "ora";
 
 class TipObj {
+  spinner: Ora;
   constructor() {
     this.spinner = ora();
   }
@@ -32,4 +32,4 @@ class TipObj {
   }
 }
 
-module.exports = TipsObj;
+export default TipObj;
