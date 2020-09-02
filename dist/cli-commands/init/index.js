@@ -24,7 +24,8 @@ function init(name) {
     const spinner = ora_1.default('创建中，请稍后').start();
     // process.cwd()获取工作区目录
     const projectDir = path_1.default.join(process.cwd(), name); // 项目创建路径
-    const sourceDir = path_1.default.join(__dirname, "./template"); // 资源文件路径
+    const sourceDir = path_1.default.join(__dirname, "../../../template"); // 模板文件路径
+    console.log(sourceDir);
     mkdirp_1.default(projectDir).then((made) => __awaiter(this, void 0, void 0, function* () {
         if (made === undefined) {
             spinner.fail('创建失败，存在同名目录');

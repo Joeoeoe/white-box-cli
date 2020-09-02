@@ -1,6 +1,5 @@
 import Webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
-import path from "path";
 import ora from "ora";
 import chalk from "chalk";
 import { DEV_SERVER_DEFAULT } from "./defaultConfig";
