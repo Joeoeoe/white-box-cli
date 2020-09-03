@@ -15,7 +15,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -47,7 +47,7 @@ commander_1.program
 commander_1.program
     .command("dev")
     .description("进入开发模式")
-    .option("-p, --port", "指定开发端口，默认为8080")
+    .option("-p, --port", "指定开发端口")
     .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
     const optionObj = util_1.parseCmd(cmd); // 命令行option选项
     const devWebpackPath = path_1.default.join(process.cwd(), "webpack.dev.js"); // 项目webpack.dev.js路径
