@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc --watch", 
+    "dev": "tsc --watch",
     "build": "tsc"
   },
   "keywords": [],
@@ -18,7 +18,8 @@
     "chalk": "^4.1.0",
     "commander": "^6.0.0",
     "mkdirp": "^1.0.4",
-    "ora": "^5.0.0"
+    "ora": "^5.0.0",
+    "ssh2-sftp-client": "^5.3.0"
   },
   "directories": {
     "test": "test"
