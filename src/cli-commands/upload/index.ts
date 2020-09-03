@@ -20,20 +20,13 @@ export async function upload(sourcePath: string, uploadConfig: IUploadConfig) {
 
     await sftp.connect(uploadConfig.targetServer);
     console.log(filesList);
-
-    const listRes = await sftp.list(targetPath);
-
-    console.log(listRes)
-
-
     for (const file of filesList) {
-        const data = fs.createReadStream(file);
-        const temp = path.join(targetPath, file);
-        console.log(temp);
-        await sftp.put(data, temp);
-        console.log(`${file}上传成功`);
+      const data = fs.createReadStream(file);
+      const serverFilePath = path.join(targetPath, file);
+      await sftp.put(data, serverFilePath.replace(/\\/g, '/'));// 解决linux与window下正反斜杆问题
+      console.log(`${file}上传成功`);
     }
   } catch (error) {
-      tip.fail(error.message);
+    tip.fail(error.message);
   }
 }

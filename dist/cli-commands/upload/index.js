@@ -30,13 +30,10 @@ function upload(sourcePath, uploadConfig) {
             const filesList = filesRes.data;
             yield sftp.connect(uploadConfig.targetServer);
             console.log(filesList);
-            const listRes = yield sftp.list(targetPath);
-            console.log(listRes);
             for (const file of filesList) {
                 const data = fs_1.default.createReadStream(file);
-                const temp = path_1.default.join(targetPath, file);
-                console.log(temp);
-                yield sftp.put(data, temp);
+                const serverFilePath = path_1.default.join(targetPath, file);
+                yield sftp.put(data, serverFilePath.replace(/\\/g, '/')); // 解决linux与window下正反斜杆问题
                 console.log(`${file}上传成功`);
             }
         }
