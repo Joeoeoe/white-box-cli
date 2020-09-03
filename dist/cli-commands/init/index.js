@@ -16,12 +16,10 @@ exports.init = void 0;
 const path_1 = __importDefault(require("path"));
 const mkdirp_1 = __importDefault(require("mkdirp")); //使用mkdirp包，可以避免一级一级创建目录
 const chalk_1 = __importDefault(require("chalk"));
-const copyDir_1 = __importDefault(require("../../util/copyDir"));
 const util_1 = require("../../util");
-const TipObj_1 = __importDefault(require("../../util/TipObj"));
 const log = console.log;
 function init(name) {
-    const tip = new TipObj_1.default();
+    const tip = new util_1.TipObj();
     tip.loading("创建中，请稍后");
     // process.cwd()获取工作区目录
     const projectDir = path_1.default.join(process.cwd(), name); // 项目创建路径
@@ -29,11 +27,11 @@ function init(name) {
     mkdirp_1.default(projectDir).then((made) => __awaiter(this, void 0, void 0, function* () {
         try {
             if (made === undefined) {
-                throw new Error('创建失败，存在同名目录');
+                throw new Error("创建失败，存在同名目录");
             }
             else {
                 // copy 模板文件
-                const dirRes = yield copyDir_1.default(sourceDir, projectDir);
+                const dirRes = yield util_1.copyDir(sourceDir, projectDir);
                 if (dirRes.err) {
                     throw dirRes.err;
                 }

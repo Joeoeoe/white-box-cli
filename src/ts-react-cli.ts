@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { program } from "commander";
 import path from "path";
-import { parseCmd } from "./util";
+import { parseCmd } from "./util/basic";
 
 const version = require("../package.json").version;
 

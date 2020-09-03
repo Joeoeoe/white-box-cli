@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import Result from "./Result";
-import { readFile, writeFile, readDir, mkDir } from "./index";
+import { Result } from "./Result";
+import { readFile, writeFile, readDir, mkDir } from "./basic";
 
 const isDirFun = function (path: string) {
   return new Promise<Result>((resolve, reject) => {
@@ -12,7 +12,7 @@ const isDirFun = function (path: string) {
   });
 };
 
-export default async function copyDir(sourceDir: string, targetDir: string) {
+export async function copyDir(sourceDir: string, targetDir: string) {
   const copyFun = async function (sourceDir, targetDir) {
     const res = await readDir(sourceDir);
     if (res.err) {

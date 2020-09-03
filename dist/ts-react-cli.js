@@ -34,7 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const path_1 = __importDefault(require("path"));
-const util_1 = require("./util");
+const basic_1 = require("./util/basic");
 const version = require("../package.json").version;
 commander_1.program.version(version, "-v, --version");
 commander_1.program
@@ -49,7 +49,7 @@ commander_1.program
     .description("进入开发模式")
     .option("-p, --port", "指定开发端口")
     .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
-    const optionObj = util_1.parseCmd(cmd); // 命令行option选项
+    const optionObj = basic_1.parseCmd(cmd); // 命令行option选项
     const devWebpackPath = path_1.default.join(process.cwd(), "webpack.dev.js"); // 项目webpack.dev.js路径
     const { dev } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/dev")));
     dev(optionObj, devWebpackPath);

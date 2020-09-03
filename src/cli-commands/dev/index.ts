@@ -2,7 +2,7 @@ import Webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 import chalk from "chalk";
 import { DEV_SERVER_DEFAULT } from "./defaultConfig";
-import TipObj from "../../util/TipObj";
+import { TipObj } from "../../util";
 
 const log = console.log;
 

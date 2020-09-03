@@ -12,15 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.copyDir = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const Result_1 = __importDefault(require("./Result"));
-const index_1 = require("./index");
+const Result_1 = require("./Result");
+const basic_1 = require("./basic");
 const isDirFun = function (path) {
     return new Promise((resolve, reject) => {
         fs_1.default.stat(path, function (err, stats) {
             const isDir = stats.isDirectory();
-            resolve(new Result_1.default(isDir, err));
+            resolve(new Result_1.Result(isDir, err));
         });
     });
 };
@@ -28,7 +29,7 @@ function copyDir(sourceDir, targetDir) {
     return __awaiter(this, void 0, void 0, function* () {
         const copyFun = function (sourceDir, targetDir) {
             return __awaiter(this, void 0, void 0, function* () {
-                const res = yield index_1.readDir(sourceDir);
+                const res = yield basic_1.readDir(sourceDir);
                 if (res.err) {
                     throw res.err;
                 }
@@ -41,7 +42,7 @@ function copyDir(sourceDir, targetDir) {
                         throw err;
                     }
                     if (isDir) {
-                        const mkDirRes = yield index_1.mkDir(targetPath);
+                        const mkDirRes = yield basic_1.mkDir(targetPath);
                         if (mkDirRes.err) {
                             throw mkDirRes.err;
                         }
@@ -51,21 +52,21 @@ function copyDir(sourceDir, targetDir) {
                         }
                     }
                     else {
-                        const readRes = yield index_1.readFile(sourcePath);
+                        const readRes = yield basic_1.readFile(sourcePath);
                         if (readRes.err) {
                             throw readRes.err;
                         }
-                        const writeRes = yield index_1.writeFile(targetPath, readRes.data);
+                        const writeRes = yield basic_1.writeFile(targetPath, readRes.data);
                         if (writeRes.err) {
                             throw writeRes.err;
                         }
                     }
                 }
-                return new Result_1.default(true, null);
+                return new Result_1.Result(true, null);
             });
         };
         const res = yield copyFun(sourceDir, targetDir);
         return res;
     });
 }
-exports.default = copyDir;
+exports.copyDir = copyDir;

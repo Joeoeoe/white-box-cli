@@ -8,7 +8,7 @@ const webpack_1 = __importDefault(require("webpack"));
 const webpack_dev_server_1 = __importDefault(require("webpack-dev-server"));
 const chalk_1 = __importDefault(require("chalk"));
 const defaultConfig_1 = require("./defaultConfig");
-const TipObj_1 = __importDefault(require("../../util/TipObj"));
+const util_1 = require("../../util");
 const log = console.log;
 // 清除值为undefined的key
 const cleanOption = function (option) {
@@ -21,7 +21,7 @@ const cleanOption = function (option) {
     return cleanedOption;
 };
 function dev(cliOption, devWebpackPath) {
-    const tip = new TipObj_1.default();
+    const tip = new util_1.TipObj();
     tip.loading('构建中');
     // 配置来源：webpack.dev.js与脚手架输入及部分默认
     // 对于各配置，优先级为  默认 < dev.js配置 < cli输入

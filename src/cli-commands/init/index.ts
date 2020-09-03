@@ -1,10 +1,7 @@
 import path from "path";
 import mkdirp from "mkdirp"; //使用mkdirp包，可以避免一级一级创建目录
 import chalk from "chalk";
-import copyDir from "../../util/copyDir";
-import { writeFile } from "../../util";
-import TipObj from "../../util/TipObj";
-
+import { TipObj, copyDir, writeFile } from "../../util";
 
 const log = console.log;
 
@@ -16,11 +13,11 @@ export function init(name) {
   // process.cwd()获取工作区目录
   const projectDir = path.join(process.cwd(), name); // 项目创建路径
   const sourceDir = path.join(__dirname, "../../../template"); // 模板文件路径
-  
+
   mkdirp(projectDir).then(async (made) => {
     try {
       if (made === undefined) {
-        throw new Error('创建失败，存在同名目录')
+        throw new Error("创建失败，存在同名目录");
       } else {
         // copy 模板文件
         const dirRes = await copyDir(sourceDir, projectDir);
@@ -37,7 +34,7 @@ export function init(name) {
           packageJsonPath,
           JSON.stringify(packageJson, null, 2)
         );
-        if(writePackageJsonRes.err){
+        if (writePackageJsonRes.err) {
           throw writePackageJsonRes.err;
         }
 

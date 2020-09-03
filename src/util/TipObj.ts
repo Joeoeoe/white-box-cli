@@ -1,6 +1,6 @@
 import ora, { Ora } from "ora";
 
-class TipObj {
+export class TipObj {
   private spinner: Ora;
   constructor() {
     this.spinner = ora();
@@ -32,4 +32,3 @@ class TipObj {
   }
 }
 
-export default TipObj;

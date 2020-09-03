@@ -1,5 +1,5 @@
 import webpack from "webpack";
-import TipObj from "../../util/TipObj";
+import { TipObj } from "../../util";
 
 export function build(path: string) {
   const tip = new TipObj();
