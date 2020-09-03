@@ -12,52 +12,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copyDir = void 0;
+exports.travelDir = void 0;
+const basic_1 = require("./basic");
 const path_1 = __importDefault(require("path"));
 const Result_1 = require("./Result");
-const basic_1 = require("./basic");
-function copyDir(sourceDir, targetDir) {
+exports.travelDir = function (dir) {
     return __awaiter(this, void 0, void 0, function* () {
-        const copyFun = function (sourceDir, targetDir) {
+        const filesList = [];
+        const travel = function (dir, filesList) {
             return __awaiter(this, void 0, void 0, function* () {
-                const res = yield basic_1.readDir(sourceDir);
+                const res = yield basic_1.readDir(dir);
                 if (res.err) {
                     throw res.err;
                 }
                 const files = res.data;
                 for (const item of files) {
-                    const sourcePath = path_1.default.join(sourceDir, item); // 资源目录
-                    const targetPath = path_1.default.join(targetDir, item); // 复制目标路径
-                    const { data: isDir, err } = yield basic_1.isDirFun(sourcePath);
+                    const itemPath = path_1.default.join(dir, item);
+                    const { data: isDir, err } = yield basic_1.isDirFun(itemPath);
                     if (err) {
                         throw err;
                     }
                     if (isDir) {
-                        const mkDirRes = yield basic_1.mkDir(targetPath);
-                        if (mkDirRes.err) {
-                            throw mkDirRes.err;
-                        }
-                        const recursionRes = yield copyFun(sourcePath, targetPath);
-                        if (recursionRes.err) {
-                            throw recursionRes.err;
+                        const recurseRes = yield travel(itemPath, filesList);
+                        if (recurseRes.err) {
+                            throw recurseRes.err;
                         }
                     }
                     else {
-                        const readRes = yield basic_1.readFile(sourcePath);
-                        if (readRes.err) {
-                            throw readRes.err;
-                        }
-                        const writeRes = yield basic_1.writeFile(targetPath, readRes.data);
-                        if (writeRes.err) {
-                            throw writeRes.err;
-                        }
+                        filesList.push(itemPath);
                     }
                 }
-                return new Result_1.Result(true, null);
+                return new Result_1.Result(filesList, null);
             });
         };
-        const res = yield copyFun(sourceDir, targetDir);
+        const res = yield travel(dir, filesList);
         return res;
     });
-}
-exports.copyDir = copyDir;
+};

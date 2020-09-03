@@ -1,16 +1,8 @@
-import fs from "fs";
 import path from "path";
 import { Result } from "./Result";
-import { readFile, writeFile, readDir, mkDir } from "./basic";
+import { readFile, writeFile, readDir, mkDir, isDirFun } from "./basic";
 
-const isDirFun = function (path: string) {
-  return new Promise<Result>((resolve, reject) => {
-    fs.stat(path, function (err, stats) {
-      const isDir = stats.isDirectory();
-      resolve(new Result(isDir, err));
-    });
-  });
-};
+
 
 export async function copyDir(sourceDir: string, targetDir: string) {
   const copyFun = async function (sourceDir, targetDir) {

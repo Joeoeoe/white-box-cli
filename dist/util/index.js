@@ -14,3 +14,4 @@ __exportStar(require("./basic"), exports);
 __exportStar(require("./copyDir"), exports);
 __exportStar(require("./Result"), exports);
 __exportStar(require("./TipObj"), exports);
+__exportStar(require("./travelDir"), exports);

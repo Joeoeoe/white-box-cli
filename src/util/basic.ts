@@ -9,6 +9,15 @@ export const readFile = function (path: string) {
   });
 };
 
+export const isDirFun = function (path: string) {
+  return new Promise<Result>((resolve, reject) => {
+    fs.stat(path, function (err, stats) {
+      const isDir = stats.isDirectory();
+      resolve(new Result(isDir, err));
+    });
+  });
+};
+
 export const writeFile = function (path: string, data) {
   return new Promise<Result>((resolve, reject) => {
     fs.writeFile(path, data, function (err) {

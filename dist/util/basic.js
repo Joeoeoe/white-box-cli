@@ -3,13 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCmd = exports.mkDir = exports.readDir = exports.writeFile = exports.readFile = void 0;
+exports.parseCmd = exports.mkDir = exports.readDir = exports.writeFile = exports.isDirFun = exports.readFile = void 0;
 const fs_1 = __importDefault(require("fs"));
 const Result_1 = require("./Result");
 exports.readFile = function (path) {
     return new Promise((resolve, reject) => {
         fs_1.default.readFile(path, (err, data) => {
             resolve(new Result_1.Result(data, err));
+        });
+    });
+};
+exports.isDirFun = function (path) {
+    return new Promise((resolve, reject) => {
+        fs_1.default.stat(path, function (err, stats) {
+            const isDir = stats.isDirectory();
+            resolve(new Result_1.Result(isDir, err));
         });
     });
 };
