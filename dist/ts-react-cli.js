@@ -62,4 +62,16 @@ commander_1.program
     const { build } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/build")));
     build(prodWebpackPath);
 }));
+commander_1.program
+    .command("upload")
+    .description("上传至SFTP服务器")
+    .action(() => __awaiter(void 0, void 0, void 0, function* () {
+    const cwd = process.cwd();
+    const configPath = path_1.default.join(cwd, "upload.json");
+    const uploadConfig = require(configPath);
+    const sourcePath = uploadConfig.sourcePath;
+    const { upload } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/upload")));
+    console.log(sourcePath);
+    upload(sourcePath, uploadConfig);
+}));
 commander_1.program.parse(process.argv);

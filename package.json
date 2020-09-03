@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/Joeoeoe/ts-react-cli#readme",
   "devDependencies": {
+    "@types/ssh2-sftp-client": "^5.2.0",
     "@types/webpack": "^4.41.21",
     "typescript": "^4.0.2",
     "webpack": "^4.44.1",

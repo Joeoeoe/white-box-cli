@@ -38,4 +38,19 @@ program
     build(prodWebpackPath);
   });
 
+program
+  .command("upload")
+  .description("上传至SFTP服务器")
+  .action(async () => {
+    const cwd = process.cwd()
+    const configPath = path.join(cwd, "upload.json");
+
+    const uploadConfig = require(configPath);
+    const sourcePath = uploadConfig.sourcePath;
+  
+    const { upload } = await import("./cli-commands/upload");
+    console.log(sourcePath);
+    upload(sourcePath, uploadConfig);
+  });
+
 program.parse(process.argv);
