@@ -37,7 +37,7 @@ ts-react-cli  init  [options]  <app-name>
 - 脚手架 typescript 改写 √
 - build功能 √
 - 脚手架报错机制 √
-- 脚手架提示完善
-- template 项目 typescript 本地安装
+- 脚手架提示完善 
+- template 项目 typescript 本地安装 √
 - upload 至服务器
 - 文档编写
