@@ -9,24 +9,34 @@ export async function upload(sourcePath: string, uploadConfig: IUploadConfig) {
   const tip = new TipObj();
   const targetPath = uploadConfig.targetPath;
   const sftp = new Client();
-  try {
+  
+  await sftp.connect(uploadConfig.targetServer);
+  sftp.on('upload', info => {
+    console.log(`uploaded: ${info.source}`);
+  });
 
-    const filesRes = await travelDir(sourcePath);
-    if (filesRes.err) {
-      throw filesRes.err;
-    }
+  const uploadRes = await sftp.uploadDir(sourcePath, targetPath);
 
-    const filesList = filesRes.data;
+  console.log('上传成功')
 
-    await sftp.connect(uploadConfig.targetServer);
-    console.log(filesList);
-    for (const file of filesList) {
-      const data = fs.createReadStream(file);
-      const serverFilePath = path.join(targetPath, file);
-      await sftp.put(data, serverFilePath.replace(/\\/g, '/'));// 解决linux与window下正反斜杆问题
-      console.log(`${file}上传成功`);
-    }
-  } catch (error) {
-    tip.fail(error.message);
-  }
+  // try {
+
+  //   const filesRes = await travelDir(sourcePath);
+  //   if (filesRes.err) {
+  //     throw filesRes.err;
+  //   }
+
+  //   const filesList = filesRes.data;
+
+  //   await sftp.connect(uploadConfig.targetServer);
+  //   console.log(filesList);
+  //   for (const file of filesList) {
+  //     const data = fs.createReadStream(file);
+  //     const serverFilePath = path.join(targetPath, file);
+  //     await sftp.put(data, serverFilePath.replace(/\\/g, '/'));// 解决linux与window下正反斜杆问题
+  //     console.log(`${file}上传成功`);
+  //   }
+  // } catch (error) {
+  //   tip.fail(error.message);
+  // }
 }
