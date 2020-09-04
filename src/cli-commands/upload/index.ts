@@ -1,7 +1,10 @@
 import Client from "ssh2-sftp-client";
-import { TipObj } from "../../util";
 import chalk from "chalk";
+import inquirer from 'inquirer';
+import { TipObj } from "../../util";
 import { IUploadConfig } from "../../types";
+import { RIGHT_CONFIG } from "./constants";
+
 
 const log = console.log;
 
@@ -34,8 +37,22 @@ export async function upload(uploadConfigPath: string) {
   const tip = new TipObj();
   const sftp = new Client();
 
+  let answerRes = null;
+  answerRes = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: chalk.blue('i'),
+      message: tip.warn(`${chalk.red('使用upload功能请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!')}`),
+      default: false,
+    }
+  ]);
+  // TODO 。。这个回答好奇怪
+  console.log(JSON.stringify(answerRes));
+
+
   let uploadConfig = null;
   try {
+    // upload.json require是否有误
     uploadConfig = require(uploadConfigPath);
   } catch (error) {
     tip.fail(error.message);
@@ -50,23 +67,16 @@ export async function upload(uploadConfigPath: string) {
     }
   } catch (error) {
     tip.fail(error.message);
-    const rightConfig = {
-      sourcePath: "源文件路径，如: ./dist",
-      targetPath: "服务器目标路径，如: /var/XXX/",
-      targetServer: {
-        host: "目标服务器IP地址",
-        poAAAArt: "端口号，sftp默认为22",
-        username: "用户名",
-        password: "密码",
-      },
-    };
-    // TODO 待添加提示
+    log(chalk.greenBright('upload.json格式示例: '));
+    log(JSON.stringify(RIGHT_CONFIG, null, 2));
+    return;
   }
 
   const sourcePath = uploadConfig.sourcePath;
   const targetPath = uploadConfig.targetPath;
 
   try {
+    // 连接服务器是否有误
     tip.loading("正在连接服务器...");
     await sftp.connect(uploadConfig.targetServer);
     tip.success("成功连接至服务器");
@@ -79,7 +89,7 @@ export async function upload(uploadConfigPath: string) {
   try {
     tip.success("开始上传...");
     sftp.on("upload", (info) => {
-      console.log(`  上传成功: ${chalk.blueBright.bold(info.source)}`);
+      console.log(`  上传成功: ${chalk.blueBright(info.source)}`);
     });
 
     await sftp.uploadDir(sourcePath, targetPath);

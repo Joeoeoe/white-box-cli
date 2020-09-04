@@ -14,8 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.upload = void 0;
 const ssh2_sftp_client_1 = __importDefault(require("ssh2-sftp-client"));
-const util_1 = require("../../util");
 const chalk_1 = __importDefault(require("chalk"));
+const inquirer_1 = __importDefault(require("inquirer"));
+const util_1 = require("../../util");
+const constants_1 = require("./constants");
 const log = console.log;
 const validateUpload = function (config) {
     const keySets = new Set([
@@ -45,8 +47,20 @@ function upload(uploadConfigPath) {
     return __awaiter(this, void 0, void 0, function* () {
         const tip = new util_1.TipObj();
         const sftp = new ssh2_sftp_client_1.default();
+        let answerRes = null;
+        answerRes = yield inquirer_1.default.prompt([
+            {
+                type: 'confirm',
+                name: chalk_1.default.blue('i'),
+                message: tip.warn(`${chalk_1.default.red('使用upload功能请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!')}`),
+                default: false,
+            }
+        ]);
+        // TODO 。。这个回答好奇怪
+        console.log(JSON.stringify(answerRes));
         let uploadConfig = null;
         try {
+            // upload.json require是否有误
             uploadConfig = require(uploadConfigPath);
         }
         catch (error) {
@@ -62,21 +76,14 @@ function upload(uploadConfigPath) {
         }
         catch (error) {
             tip.fail(error.message);
-            const rightConfig = {
-                sourcePath: "源文件路径，如: ./dist",
-                targetPath: "服务器目标路径，如: /var/XXX/",
-                targetServer: {
-                    host: "目标服务器IP地址",
-                    poAAAArt: "端口号，sftp默认为22",
-                    username: "用户名",
-                    password: "密码",
-                },
-            };
-            // TODO 待添加提示
+            log(chalk_1.default.greenBright('upload.json格式示例: '));
+            log(JSON.stringify(constants_1.RIGHT_CONFIG, null, 2));
+            return;
         }
         const sourcePath = uploadConfig.sourcePath;
         const targetPath = uploadConfig.targetPath;
         try {
+            // 连接服务器是否有误
             tip.loading("正在连接服务器...");
             yield sftp.connect(uploadConfig.targetServer);
             tip.success("成功连接至服务器");
@@ -89,7 +96,7 @@ function upload(uploadConfigPath) {
         try {
             tip.success("开始上传...");
             sftp.on("upload", (info) => {
-                console.log(`  上传成功: ${chalk_1.default.blueBright.bold(info.source)}`);
+                console.log(`  上传成功: ${chalk_1.default.blueBright(info.source)}`);
             });
             yield sftp.uploadDir(sourcePath, targetPath);
             tip.success(`${sourcePath} 内容成功上传至 ${targetPath}`);

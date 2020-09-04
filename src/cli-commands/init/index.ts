@@ -39,7 +39,7 @@ export function init(name) {
         }
 
         tip.success("创建成功, 接下来启动项目: ");
-        log(`  ${chalk.greenBright.bold("cd")} ${name}`);
+        log(`  ${chalk.greenBright("cd")} ${name}`);
         log(`  npm i`);
         log(`  npm run dev ${chalk.magenta("or")} ts-react-cli dev`);
       }

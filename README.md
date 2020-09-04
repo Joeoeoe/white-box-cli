@@ -41,5 +41,5 @@ ts-react-cli  init  [options]  <app-name>
 - template 项目 typescript 本地安装 √
 - tsc watch √
 - upload 至服务器 √
-- upload 1.添加防止信息泄露提示, 使用inquirer提醒交互; 2.没有upload.json的异常处理
+- upload 1.添加防止信息泄露提示, 使用inquirer提醒交互;
 - 文档编写

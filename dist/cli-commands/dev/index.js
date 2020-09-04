@@ -34,7 +34,7 @@ function dev(cliOption, devWebpackPath) {
     const compiler = webpack_1.default(config);
     compiler.hooks.done.tap("done", () => {
         log();
-        tip.success(`构建成功! ${chalk_1.default.blueBright.bold("http://localhost:" + port + "/")}`);
+        tip.success(`构建成功! ${chalk_1.default.blueBright("http://localhost:" + port + "/")}`);
     });
     compiler.hooks.failed.tap('failed', (error) => {
         tip.fail(error.message);

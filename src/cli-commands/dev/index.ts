@@ -39,7 +39,7 @@ export function dev(cliOption, devWebpackPath: string) {
   const compiler = Webpack(config);
   compiler.hooks.done.tap("done", () => {
     log();
-    tip.success(`构建成功! ${chalk.blueBright.bold(
+    tip.success(`构建成功! ${chalk.blueBright(
       "http://localhost:" + port + "/"
     )}`);
   });

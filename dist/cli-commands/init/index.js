@@ -44,7 +44,7 @@ function init(name) {
                     throw writePackageJsonRes.err;
                 }
                 tip.success("创建成功, 接下来启动项目: ");
-                log(`  ${chalk_1.default.greenBright.bold("cd")} ${name}`);
+                log(`  ${chalk_1.default.greenBright("cd")} ${name}`);
                 log(`  npm i`);
                 log(`  npm run dev ${chalk_1.default.magenta("or")} ts-react-cli dev`);
             }
