@@ -40,5 +40,6 @@ ts-react-cli  init  [options]  <app-name>
 - 脚手架提示完善 √
 - template 项目 typescript 本地安装 √
 - tsc watch √
-- upload 至服务器
+- upload 至服务器 √
+- upload 添加防止信息泄露提示
 - 文档编写

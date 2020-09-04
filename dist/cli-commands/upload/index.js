@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.upload = void 0;
 const ssh2_sftp_client_1 = __importDefault(require("ssh2-sftp-client"));
 const util_1 = require("../../util");
+const chalk_1 = __importDefault(require("chalk"));
 const log = console.log;
 function upload(sourcePath, uploadConfig) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -34,15 +35,14 @@ function upload(sourcePath, uploadConfig) {
         try {
             tip.success("开始上传...");
             sftp.on("upload", (info) => {
-                // TODO 添加upload结果监听
-                console.log(`  ${info.source} 上传成功`);
+                console.log(`  上传成功: ${chalk_1.default.blueBright.bold(info.source)}`);
             });
             yield sftp.uploadDir(sourcePath, targetPath);
-            tip.success(`${sourcePath}内容成功上传至${targetPath}`);
+            tip.success(`${sourcePath} 内容成功上传至 ${targetPath}`);
             sftp.end();
         }
         catch (error) {
-            tip.fail("上传目录失败，原因: ");
+            tip.fail("上传出现错误，原因: ");
             log(error.message);
             return;
         }

@@ -1,6 +1,7 @@
 import Client from "ssh2-sftp-client";
 import { IUploadConfig } from "../../types";
 import { TipObj } from "../../util";
+import chalk from "chalk";
 
 const log = console.log;
 
@@ -22,16 +23,15 @@ export async function upload(sourcePath: string, uploadConfig: IUploadConfig) {
   try {
     tip.success("开始上传...");
     sftp.on("upload", (info) => {
-      // TODO 添加upload结果监听
-      console.log(`  ${info.source} 上传成功`);
+      console.log(`  上传成功: ${chalk.blueBright.bold(info.source)}`);
     });
 
     await sftp.uploadDir(sourcePath, targetPath);
 
-    tip.success(`${sourcePath}内容成功上传至${targetPath}`);
+    tip.success(`${sourcePath} 内容成功上传至 ${targetPath}`);
     sftp.end();
   } catch (error) {
-    tip.fail("上传目录失败，原因: ");
+    tip.fail("上传出现错误，原因: ");
     log(error.message);
     return;
   }
