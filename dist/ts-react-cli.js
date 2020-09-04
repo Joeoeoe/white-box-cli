@@ -68,9 +68,7 @@ commander_1.program
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
     const cwd = process.cwd();
     const configPath = path_1.default.join(cwd, "upload.json");
-    const uploadConfig = require(configPath);
-    const sourcePath = uploadConfig.sourcePath;
     const { upload } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/upload")));
-    upload(sourcePath, uploadConfig);
+    upload(configPath);
 }));
 commander_1.program.parse(process.argv);

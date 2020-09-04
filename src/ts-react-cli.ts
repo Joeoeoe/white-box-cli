@@ -45,11 +45,8 @@ program
     const cwd = process.cwd()
     const configPath = path.join(cwd, "upload.json");
 
-    const uploadConfig = require(configPath);
-    const sourcePath = uploadConfig.sourcePath;
-  
     const { upload } = await import("./cli-commands/upload");
-    upload(sourcePath, uploadConfig);
+    upload(configPath);
   });
 
 program.parse(process.argv);
