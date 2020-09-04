@@ -15,34 +15,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.upload = void 0;
 const ssh2_sftp_client_1 = __importDefault(require("ssh2-sftp-client"));
 const util_1 = require("../../util");
+const log = console.log;
 function upload(sourcePath, uploadConfig) {
     return __awaiter(this, void 0, void 0, function* () {
         const tip = new util_1.TipObj();
         const targetPath = uploadConfig.targetPath;
         const sftp = new ssh2_sftp_client_1.default();
-        yield sftp.connect(uploadConfig.targetServer);
-        sftp.on('upload', info => {
-            console.log(`uploaded: ${info.source}`);
-        });
-        const uploadRes = yield sftp.uploadDir(sourcePath, targetPath);
-        console.log('上传成功');
-        // try {
-        //   const filesRes = await travelDir(sourcePath);
-        //   if (filesRes.err) {
-        //     throw filesRes.err;
-        //   }
-        //   const filesList = filesRes.data;
-        //   await sftp.connect(uploadConfig.targetServer);
-        //   console.log(filesList);
-        //   for (const file of filesList) {
-        //     const data = fs.createReadStream(file);
-        //     const serverFilePath = path.join(targetPath, file);
-        //     await sftp.put(data, serverFilePath.replace(/\\/g, '/'));// 解决linux与window下正反斜杆问题
-        //     console.log(`${file}上传成功`);
-        //   }
-        // } catch (error) {
-        //   tip.fail(error.message);
-        // }
+        try {
+            tip.loading("正在连接服务器...");
+            yield sftp.connect(uploadConfig.targetServer);
+            tip.success("成功连接至服务器");
+        }
+        catch (error) {
+            tip.fail("连接服务器失败，原因: ");
+            log(error.message);
+            return;
+        }
+        try {
+            tip.success("开始上传...");
+            sftp.on("upload", (info) => {
+                // TODO 添加upload结果监听
+                console.log(`  ${info.source} 上传成功`);
+            });
+            yield sftp.uploadDir(sourcePath, targetPath);
+            tip.success(`${sourcePath}内容成功上传至${targetPath}`);
+            sftp.end();
+        }
+        catch (error) {
+            tip.fail("上传目录失败，原因: ");
+            log(error.message);
+            return;
+        }
     });
 }
 exports.upload = upload;

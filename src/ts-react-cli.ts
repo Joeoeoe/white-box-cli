@@ -49,7 +49,6 @@ program
     const sourcePath = uploadConfig.sourcePath;
   
     const { upload } = await import("./cli-commands/upload");
-    console.log(sourcePath);
     upload(sourcePath, uploadConfig);
   });
 

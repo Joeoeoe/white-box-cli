@@ -1,42 +1,38 @@
-
-import fs from 'fs';
-import path from 'path';
 import Client from "ssh2-sftp-client";
 import { IUploadConfig } from "../../types";
-import { travelDir, TipObj } from "../../util";
+import { TipObj } from "../../util";
+
+const log = console.log;
 
 export async function upload(sourcePath: string, uploadConfig: IUploadConfig) {
   const tip = new TipObj();
   const targetPath = uploadConfig.targetPath;
   const sftp = new Client();
-  
-  await sftp.connect(uploadConfig.targetServer);
-  sftp.on('upload', info => {
-    console.log(`uploaded: ${info.source}`);
-  });
 
-  const uploadRes = await sftp.uploadDir(sourcePath, targetPath);
+  try {
+    tip.loading("正在连接服务器...");
+    await sftp.connect(uploadConfig.targetServer);
+    tip.success("成功连接至服务器");
+  } catch (error) {
+    tip.fail("连接服务器失败，原因: ");
+    log(error.message);
+    return;
+  }
 
-  console.log('上传成功')
+  try {
+    tip.success("开始上传...");
+    sftp.on("upload", (info) => {
+      // TODO 添加upload结果监听
+      console.log(`  ${info.source} 上传成功`);
+    });
 
-  // try {
+    await sftp.uploadDir(sourcePath, targetPath);
 
-  //   const filesRes = await travelDir(sourcePath);
-  //   if (filesRes.err) {
-  //     throw filesRes.err;
-  //   }
-
-  //   const filesList = filesRes.data;
-
-  //   await sftp.connect(uploadConfig.targetServer);
-  //   console.log(filesList);
-  //   for (const file of filesList) {
-  //     const data = fs.createReadStream(file);
-  //     const serverFilePath = path.join(targetPath, file);
-  //     await sftp.put(data, serverFilePath.replace(/\\/g, '/'));// 解决linux与window下正反斜杆问题
-  //     console.log(`${file}上传成功`);
-  //   }
-  // } catch (error) {
-  //   tip.fail(error.message);
-  // }
+    tip.success(`${sourcePath}内容成功上传至${targetPath}`);
+    sftp.end();
+  } catch (error) {
+    tip.fail("上传目录失败，原因: ");
+    log(error.message);
+    return;
+  }
 }
