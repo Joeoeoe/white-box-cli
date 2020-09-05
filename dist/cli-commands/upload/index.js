@@ -67,7 +67,6 @@ function upload(optionObj, uploadConfigPath) {
     return __awaiter(this, void 0, void 0, function* () {
         const tip = new util_1.TipObj();
         const sftp = new ssh2_sftp_client_1.default();
-        // TODO 添加打包后再上传选项，先选择环境信息完毕再打包
         /**
          * 泄露确认
          */
@@ -118,7 +117,6 @@ function upload(optionObj, uploadConfigPath) {
             log(JSON.stringify(constants_1.RIGHT_CONFIG, null, 2));
             return;
         }
-        console.log(optionObj);
         if (optionObj['build']) {
             const prodWebpackPath = path_1.default.join(process.cwd(), "webpack.prod.js");
             const { build } = yield Promise.resolve().then(() => __importStar(require("../../cli-commands/build")));

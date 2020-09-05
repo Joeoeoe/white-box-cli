@@ -38,7 +38,6 @@ export async function upload(optionObj, uploadConfigPath: string) {
   const tip = new TipObj();
   const sftp = new Client();
 
-  // TODO 添加打包后再上传选项，先选择环境信息完毕再打包
   /**
    * 泄露确认
    */
@@ -92,7 +91,6 @@ export async function upload(optionObj, uploadConfigPath: string) {
     return;
   }
 
-  console.log(optionObj);
   if(optionObj['build']){
     const prodWebpackPath = path.join(process.cwd(), "webpack.prod.js");
     const { build } = await import("../../cli-commands/build");
