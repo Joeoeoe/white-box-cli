@@ -38,7 +38,7 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'prettier/prettier': 'error', // 设置提醒类型
-    'react/prop-types': 'off', // 有ts了，不需要react prop
+    'react/prop-types': 'off', // 有ts了，不需要react proptypes
     '@typescript-eslint/no-explicit-any': 'off',
   },
   settings: {

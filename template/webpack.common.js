@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     filename: 'main-[hash].js',
-    publicPath:'./'
+    publicPath: './'
   },
 
   /**
@@ -37,7 +37,6 @@ module.exports = {
           },
         ],
       },
-
       // html处理
       {
         test: /\.html$/,
@@ -48,60 +47,18 @@ module.exports = {
         ],
       },
 
-      // css与css module处理(已按照需求分别配置到dev、prod)
-      // 配合react-hot-loader，
-      // dev与prod中对CSS处理的不同：1.css module的hash处理 2.样式是否写于js之中，配合react-hot-loader
-      // {
-      //   test: /\.css$/,
-      //   //匹配.css或.module.css
-      //   oneOf: [
-      //     {
-      //       test: /\.module\.css/,
-      //       use: [
-      //         // {
-      //         //   loader: "style-loader"//把<style></style>标签放在DOM中（因为CSS文件以开始没有分离
-      //         // },
-      //         {
-      //           loader: MiniCssExtractPlugin.loader //使打包后CSS与js文件分离
-      //         },
-      //         {
-      //           loader: "css-loader",
-      //           options: {
-      //             modules: {//css modules 启用
-      //               localIdentName: "[name]__[local]--[hash:base64:5]"
-      //             }
-      //           }
-      //         },
-      //         {
-      //           loader: "postcss-loader"
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       use: [
-      //         // {
-      //         //   loader: "style-loader"
-      //         // },
-      //         {
-      //           loader: MiniCssExtractPlugin.loader //使打包后CSS与js文件分离
-      //         },
-      //         {
-      //           loader: "css-loader"
-      //         },
-      //         {
-      //           loader: "postcss-loader"
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // },
+      /**
+       * css与css module处理(为调试时可热更，已按照需求分别配置到dev、prod)
+       * dev与prod中对CSS处理的不同：1.css module的hash处理 2.样式是否写于js之中，配合react-hot-loader
+       */
+
 
       // 图片处理
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/i,
         use: [
           {
-            loader: 'url-loader', // 需要npm安装file-loader，会自动配合file-loader，但use中不需要写
+            loader: 'url-loader', // 需安装file-loader，会自动配合file-loader，但use中不需要写
             options: {
               outputPath: 'images/',
               limit: 10 * 1024, // 10kb以下转换为base64
@@ -119,13 +76,13 @@ module.exports = {
             options: {
               name: '[name]-[hash:5].min.[ext]',
               limit: 5000, // fonts file size <= 5KB, use 'base64'; else, output svg file
-              // publicPath: "fonts/", //????
               outputPath: 'fonts/',
             },
           },
         ],
       },
 
+      // ts与tsx处理
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
@@ -138,22 +95,13 @@ module.exports = {
     ],
   },
 
-  /**
-   * Plugins are the backbone of webpack. webpack itself is
-   *  built on the same plugin system that you use in your webpack
-   *  configuration!
-   */
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: './index.html',
     }),
 
-    /**
-     * Hot Module Replacement (HMR) exchanges, adds, or removes
-     * modules while an application is running, without a full
-     * reload.
-     */
+    // HMR
     new webpack.HotModuleReplacementPlugin(),
 
     // css与js分离
@@ -165,8 +113,10 @@ module.exports = {
 
     new webpack.ProvidePlugin({
       // 全局变量，不用每个地方都import
+      // 距离
       // '$http': 'axios'
     }),
+
     // 清除上一次build的文件
     new CleanWebpackPlugin(),
 
@@ -185,8 +135,4 @@ module.exports = {
       'react-dom': '@hot-loader/react-dom',
     },
   },
-  //   externals: {
-  //     "react": "React",
-  //     "react-dom": "ReactDOM"
-  // }
 };

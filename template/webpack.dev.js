@@ -22,7 +22,7 @@ module.exports = merge.smart(commonWebpack, {
             test: /\.module\.(le|c)ss/,
             use: [
               {
-                loader: 'style-loader', // 把<style></style>标签放在DOM中（因为CSS文件以开始没有分离
+                loader: 'style-loader', // 把<style></style>标签放在DOM中
               },
               // {
               //   loader: MiniCssExtractPlugin.loader //使打包后CSS与js文件分离
@@ -71,10 +71,8 @@ module.exports = merge.smart(commonWebpack, {
   devServer: {
     hot: true,
     host: 'localhost',
-    port: 8081,
+    port: 8080,
     historyApiFallback: true, // 404跳转至index.html
-    proxy: {
-      // 代理，可用于跨域，多个后台服务器（上线用nginx?）等情况。
-    },
+    proxy: {},//代理配置
   },
 });

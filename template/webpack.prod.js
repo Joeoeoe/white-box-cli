@@ -4,7 +4,7 @@ const commonWebpack = require('./webpack.common');
 
 module.exports = merge.smart(commonWebpack, {
   mode: 'production',
-  //   devtool: "cheap-module-source-map" //可不用
+
   entry: `${__dirname}/src/index.js`,
   module: {
     rules: [
@@ -17,7 +17,7 @@ module.exports = merge.smart(commonWebpack, {
             test: /\.module\.css/,
             use: [
               // {
-              //   loader: "style-loader"//把<style></style>标签放在DOM中（因为CSS文件以开始没有分离
+              //   loader: "style-loader"//把<style></style>标签放在DOM中
               // },
               {
                 loader: MiniCssExtractPlugin.loader, // 使打包后CSS与js文件分离
