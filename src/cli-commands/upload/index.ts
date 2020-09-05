@@ -24,7 +24,7 @@ const validateUpload = function (config: IUploadConfig,): boolean {
     let tempObj = config;
     const keyArray = outKey.split(".");
     for (const key of keyArray) {
-      if (tempObj.hasOwnProperty(key)) {
+      if (tempObj.hasOwnProperty(key) && tempObj[key]) { // 存在key值，并且为有效值
         tempObj = tempObj[key];
       } else {
         return false;
@@ -91,7 +91,7 @@ export async function upload(optionObj, uploadConfigPath: string) {
     return;
   }
 
-  if(optionObj['build']){
+  if (optionObj['build']) {
     const prodWebpackPath = path.join(process.cwd(), "webpack.prod.js");
     const { build } = await import("../../cli-commands/build");
     await build(prodWebpackPath);

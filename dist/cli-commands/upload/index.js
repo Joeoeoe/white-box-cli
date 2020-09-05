@@ -53,7 +53,7 @@ const validateUpload = function (config) {
         let tempObj = config;
         const keyArray = outKey.split(".");
         for (const key of keyArray) {
-            if (tempObj.hasOwnProperty(key)) {
+            if (tempObj.hasOwnProperty(key) && tempObj[key]) { // 存在key值，并且为有效值
                 tempObj = tempObj[key];
             }
             else {
