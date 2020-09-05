@@ -2,8 +2,6 @@
  * 注意！请注意防止敏感信息外泄！.gitignore已添加upload.js，防止upload.js提交到github上！
  * 注意！请注意防止敏感信息外泄！.gitignore已添加upload.js，防止upload.js提交到github上！
  * 注意！请注意防止敏感信息外泄！.gitignore已添加upload.js，防止upload.js提交到github上！
- * 
- * 完成配置后更改文件名为upload.js即可使用
  */
 
 module.exports = {
