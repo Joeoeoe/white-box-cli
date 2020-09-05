@@ -1,6 +1,6 @@
 {
   "name": "@jonithan/ts-react-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ts-react项目脚手架",
   "main": "index.js",
   "bin": {
