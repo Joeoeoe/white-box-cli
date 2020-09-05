@@ -41,13 +41,14 @@ export async function upload(uploadConfigPath: string) {
   answerRes = await inquirer.prompt([
     {
       type: 'confirm',
-      name: chalk.blue('i'),
-      message: tip.warn(`${chalk.red('使用upload功能请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!')}`),
+      name: 'uploadConfirm',
+      message: chalk.redBright('请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!'),
       default: false,
     }
   ]);
-  // TODO 。。这个回答好奇怪
-  console.log(JSON.stringify(answerRes));
+  if (answerRes.uploadConfirm === false) {
+    return;
+  }
 
 
   let uploadConfig = null;

@@ -51,13 +51,14 @@ function upload(uploadConfigPath) {
         answerRes = yield inquirer_1.default.prompt([
             {
                 type: 'confirm',
-                name: chalk_1.default.blue('i'),
-                message: tip.warn(`${chalk_1.default.red('使用upload功能请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!')}`),
+                name: 'uploadConfirm',
+                message: chalk_1.default.redBright('请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!'),
                 default: false,
             }
         ]);
-        // TODO 。。这个回答好奇怪
-        console.log(JSON.stringify(answerRes));
+        if (answerRes.uploadConfirm === false) {
+            return;
+        }
         let uploadConfig = null;
         try {
             // upload.json require是否有误
