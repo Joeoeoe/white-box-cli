@@ -1,3 +1,4 @@
+import path from "path";
 import Client from "ssh2-sftp-client";
 import chalk from "chalk";
 import inquirer from 'inquirer';
@@ -8,7 +9,7 @@ import { RIGHT_CONFIG } from "./constants";
 
 const log = console.log;
 
-const validateUpload = function (config: IUploadConfig): boolean {
+const validateUpload = function (config: IUploadConfig,): boolean {
   const keySets = new Set([
     "sourcePath",
     "targetPath",
@@ -33,10 +34,11 @@ const validateUpload = function (config: IUploadConfig): boolean {
   return true;
 };
 
-export async function upload(uploadConfigPath: string) {
+export async function upload(optionObj, uploadConfigPath: string) {
   const tip = new TipObj();
   const sftp = new Client();
 
+  // TODO 添加打包后再上传选项，先选择环境信息完毕再打包
   /**
    * 泄露确认
    */
@@ -44,7 +46,7 @@ export async function upload(uploadConfigPath: string) {
     {
       type: 'confirm',
       name: 'uploadConfirm',
-      message: chalk.redBright('请确认upload.json不会外泄，比如.gitignore文件应该含upload.json路径!'),
+      message: chalk.redBright('请确认upload.js不会外泄，比如.gitignore文件应该含upload.js路径!'),
       default: false,
     }
   ]);
@@ -55,7 +57,7 @@ export async function upload(uploadConfigPath: string) {
   let uploadConfigArray: Array<IUploadConfig> = null;
   let uploadConfig: IUploadConfig = null;
   try {
-    // 正确引入upload.js
+    // 引入upload.js
     uploadConfigArray = require(uploadConfigPath)['serverArray'];
   } catch (error) {
     tip.fail(error.message);
@@ -73,23 +75,28 @@ export async function upload(uploadConfigPath: string) {
       choices: uploadConfigArray.map(item => item.name),
     },
   ]);
-
   uploadConfig = uploadConfigArray.find(item => item.name === envRes['envName']);
 
 
-
   try {
-    // uploadJson格式校验
+    // upload.js格式校验
     const formatRight = validateUpload(uploadConfig);
     if (formatRight === false) {
       throw new Error(`服务器信息配置有误`);
     }
   } catch (error) {
     tip.fail(error.message);
-    log(chalk.greenBright('upload.json格式示例: '));
+    log(chalk.greenBright('upload.js格式示例: '));
     // TODO 到时贴github链接
     log(JSON.stringify(RIGHT_CONFIG, null, 2));
     return;
+  }
+
+  console.log(optionObj);
+  if(optionObj['build']){
+    const prodWebpackPath = path.join(process.cwd(), "webpack.prod.js");
+    const { build } = await import("../../cli-commands/build");
+    await build(prodWebpackPath);
   }
 
 

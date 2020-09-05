@@ -8,6 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ts-react-cli build",
     "dev": "ts-react-cli dev",
+    "upload":"ts-react-cli upload",
+    "build-upload":"ts-react-cli upload --build",
     "fix": "npx eslint ./ --fix --ext .js,.jsx,.ts,.tsx",
     "format": "npx prettier --write ."
   },

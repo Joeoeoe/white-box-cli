@@ -48,7 +48,7 @@ commander_1.program
 commander_1.program
     .command("dev")
     .description("进入开发模式")
-    .option("-p, --port", "指定开发端口")
+    .option("-p, --port [port]", "指定开发端口")
     .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
     const optionObj = basic_1.parseCmd(cmd); // 命令行option选项
     const devWebpackPath = path_1.default.join(process.cwd(), "webpack.dev.js"); // 项目webpack.dev.js路径
@@ -65,11 +65,13 @@ commander_1.program
 }));
 commander_1.program
     .command("upload")
-    .description("上传至SFTP服务器")
-    .action(() => __awaiter(void 0, void 0, void 0, function* () {
+    .description("上传至FTP服务器")
+    .option("-b, --build", "打包后再上传")
+    .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
+    const optionObj = basic_1.parseCmd(cmd);
     const cwd = process.cwd();
     const configPath = path_1.default.join(cwd, constants_1.UPLOAD_NAME);
     const { upload } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/upload")));
-    upload(configPath);
+    upload(optionObj, configPath);
 }));
 commander_1.program.parse(process.argv);

@@ -6,17 +6,6 @@ import { TipObj } from "../../util";
 
 const log = console.log;
 
-// 清除值为undefined的key
-const cleanOption = function (option) {
-  const cleanedOption = {};
-  Object.keys(option).forEach(function (key) {
-    if (option[key] !== undefined) {
-      cleanedOption[key] = option[key];
-    }
-  });
-  return cleanedOption;
-};
-
 export function dev(cliOption, devWebpackPath: string) {
   const tip = new TipObj();
 
@@ -28,7 +17,7 @@ export function dev(cliOption, devWebpackPath: string) {
   const devServerPbj = Object.assign(
     DEV_SERVER_DEFAULT,
     config.devServer,
-    cleanOption(cliOption)
+    cliOption
   );
   config.devServer = devServerPbj;
 

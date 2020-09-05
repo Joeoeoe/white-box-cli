@@ -20,7 +20,7 @@ program
 program
   .command("dev")
   .description("进入开发模式")
-  .option("-p, --port", "指定开发端口")
+  .option("-p, --port [port]", "指定开发端口")
   .action(async (cmd) => {
     const optionObj = parseCmd(cmd); // 命令行option选项
     const devWebpackPath = path.join(process.cwd(), "webpack.dev.js"); // 项目webpack.dev.js路径
@@ -41,13 +41,15 @@ program
 
 program
   .command("upload")
-  .description("上传至SFTP服务器")
-  .action(async () => {
-    const cwd = process.cwd()
+  .description("上传至FTP服务器")
+  .option("-b, --build", "打包后再上传")
+  .action(async (cmd) => {
+    const optionObj = parseCmd(cmd);
+    const cwd = process.cwd();
     const configPath = path.join(cwd, UPLOAD_NAME);
 
     const { upload } = await import("./cli-commands/upload");
-    upload(configPath);
+    upload(optionObj, configPath);
   });
 
 program.parse(process.argv);

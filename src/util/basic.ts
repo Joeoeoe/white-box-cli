@@ -45,13 +45,24 @@ export const mkDir = function (path: string) {
 export const parseCmd = function (cmd) {
   const optionsArray = cmd.options;
   const optionsObj = {};
-  const args = cmd.args;
 
   for (let i = 0; i < optionsArray.length; i++) {
     const optionItem = optionsArray[i];
     const longFlag = optionItem.long.replace(/^--/, "");
-    optionsObj[longFlag] = args[i];
+    if(cmd[longFlag]){
+      optionsObj[longFlag] = cmd[longFlag]
+    }
   }
-
   return optionsObj;
+};
+
+// 清除值为undefined的key
+export const cleanOption = function (option) {
+  const cleanedOption = {};
+  Object.keys(option).forEach(function (key) {
+    if (option[key] !== undefined) {
+      cleanedOption[key] = option[key];
+    }
+  });
+  return cleanedOption;
 };

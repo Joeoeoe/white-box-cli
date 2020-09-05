@@ -10,23 +10,13 @@ const chalk_1 = __importDefault(require("chalk"));
 const defaultConfig_1 = require("./defaultConfig");
 const util_1 = require("../../util");
 const log = console.log;
-// 清除值为undefined的key
-const cleanOption = function (option) {
-    const cleanedOption = {};
-    Object.keys(option).forEach(function (key) {
-        if (option[key] !== undefined) {
-            cleanedOption[key] = option[key];
-        }
-    });
-    return cleanedOption;
-};
 function dev(cliOption, devWebpackPath) {
     const tip = new util_1.TipObj();
     tip.loading('构建中');
     // 配置来源：webpack.dev.js与脚手架输入及部分默认
     // 对于各配置，优先级为  默认 < dev.js配置 < cli输入
     const config = require(devWebpackPath);
-    const devServerPbj = Object.assign(defaultConfig_1.DEV_SERVER_DEFAULT, config.devServer, cleanOption(cliOption));
+    const devServerPbj = Object.assign(defaultConfig_1.DEV_SERVER_DEFAULT, config.devServer, cliOption);
     config.devServer = devServerPbj;
     // 端口
     const port = devServerPbj["port"];

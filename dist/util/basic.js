@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCmd = exports.mkDir = exports.readDir = exports.writeFile = exports.isDirFun = exports.readFile = void 0;
+exports.cleanOption = exports.parseCmd = exports.mkDir = exports.readDir = exports.writeFile = exports.isDirFun = exports.readFile = void 0;
 const fs_1 = __importDefault(require("fs"));
 const Result_1 = require("./Result");
 exports.readFile = function (path) {
@@ -45,11 +45,22 @@ exports.mkDir = function (path) {
 exports.parseCmd = function (cmd) {
     const optionsArray = cmd.options;
     const optionsObj = {};
-    const args = cmd.args;
     for (let i = 0; i < optionsArray.length; i++) {
         const optionItem = optionsArray[i];
         const longFlag = optionItem.long.replace(/^--/, "");
-        optionsObj[longFlag] = args[i];
+        if (cmd[longFlag]) {
+            optionsObj[longFlag] = cmd[longFlag];
+        }
     }
     return optionsObj;
+};
+// 清除值为undefined的key
+exports.cleanOption = function (option) {
+    const cleanedOption = {};
+    Object.keys(option).forEach(function (key) {
+        if (option[key] !== undefined) {
+            cleanedOption[key] = option[key];
+        }
+    });
+    return cleanedOption;
 };

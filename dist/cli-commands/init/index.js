@@ -30,12 +30,16 @@ function init(name) {
                 throw new Error("创建失败，存在同名目录");
             }
             else {
-                // copy 模板文件
+                /**
+                 * copy模板文件
+                 */
                 const dirRes = yield util_1.copyDir(sourceDir, projectDir);
                 if (dirRes.err) {
                     throw dirRes.err;
                 }
-                // 修改package.json项目名
+                /**
+                 * 修改package.json项目名
+                 */
                 const packageJsonPath = path_1.default.join(projectDir, "package.json");
                 const packageJson = require(packageJsonPath);
                 packageJson.name = name;
