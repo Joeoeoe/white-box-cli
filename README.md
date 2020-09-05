@@ -17,6 +17,11 @@ ts-react 项目脚手架
 - HMR
 
 
+# 快速使用
+```
+npx ts-react-cli init my-app
+```
+
 # 功能命令
 
 ## 初始化项目
