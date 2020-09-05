@@ -13,7 +13,6 @@ program
   .description("使用 ts-react-cli 初始化项目")
   .action(async (name: string) => {
     const { init } = await import("./cli-commands/init");
-
     init(name);
   });
 
@@ -24,8 +23,8 @@ program
   .action(async (cmd) => {
     const optionObj = parseCmd(cmd); // 命令行option选项
     const devWebpackPath = path.join(process.cwd(), "webpack.dev.js"); // 项目webpack.dev.js路径
-    const { dev } = await import("./cli-commands/dev");
 
+    const { dev } = await import("./cli-commands/dev");
     dev(optionObj, devWebpackPath);
   });
 
@@ -34,8 +33,8 @@ program
   .description("打包应用")
   .action(async () => {
     const prodWebpackPath = path.join(process.cwd(), "webpack.prod.js");
-    const { build } = await import("./cli-commands/build");
 
+    const { build } = await import("./cli-commands/build");
     build(prodWebpackPath);
   });
 

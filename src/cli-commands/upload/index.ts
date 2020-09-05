@@ -99,8 +99,6 @@ export async function upload(optionObj, uploadConfigPath: string) {
     await build(prodWebpackPath);
   }
 
-
-
   const sourcePath = uploadConfig.sourcePath;
   const targetPath = uploadConfig.targetPath;
 
