@@ -4,7 +4,6 @@ import chalk from "chalk";
 import inquirer from 'inquirer';
 import { TipObj } from "../../util";
 import { IUploadConfig } from "../../types";
-import { RIGHT_CONFIG } from "./constants";
 
 
 const log = console.log;
@@ -81,13 +80,12 @@ export async function upload(optionObj, uploadConfigPath: string) {
     // upload.js格式校验
     const formatRight = validateUpload(uploadConfig);
     if (formatRight === false) {
-      throw new Error(`服务器信息配置有误`);
+      throw new Error(`服务器信息配置有误!!!`);
     }
   } catch (error) {
-    tip.fail(error.message);
-    log(chalk.greenBright('upload.js格式示例: '));
-    // TODO 到时贴github链接
-    log(JSON.stringify(RIGHT_CONFIG, null, 2));
+    log()
+    tip.fail(chalk.redBright(error.message));
+    log(`upload.js格式示例: ${chalk.blueBright('https://github.com/Joeoeoe/ts-react-cli/blob/master/template/upload.js')}`);
     return;
   }
 

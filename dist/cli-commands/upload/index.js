@@ -37,7 +37,6 @@ const ssh2_sftp_client_1 = __importDefault(require("ssh2-sftp-client"));
 const chalk_1 = __importDefault(require("chalk"));
 const inquirer_1 = __importDefault(require("inquirer"));
 const util_1 = require("../../util");
-const constants_1 = require("./constants");
 const log = console.log;
 const validateUpload = function (config) {
     const keySets = new Set([
@@ -107,14 +106,13 @@ function upload(optionObj, uploadConfigPath) {
             // upload.js格式校验
             const formatRight = validateUpload(uploadConfig);
             if (formatRight === false) {
-                throw new Error(`服务器信息配置有误`);
+                throw new Error(`服务器信息配置有误!!!`);
             }
         }
         catch (error) {
-            tip.fail(error.message);
-            log(chalk_1.default.greenBright('upload.js格式示例: '));
-            // TODO 到时贴github链接
-            log(JSON.stringify(constants_1.RIGHT_CONFIG, null, 2));
+            log();
+            tip.fail(chalk_1.default.redBright(error.message));
+            log(`upload.js格式示例: ${chalk_1.default.blueBright('https://github.com/Joeoeoe/ts-react-cli/blob/master/template/upload.js')}`);
             return;
         }
         if (optionObj['build']) {
