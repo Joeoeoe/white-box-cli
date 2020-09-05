@@ -37,8 +37,10 @@ export async function upload(uploadConfigPath: string) {
   const tip = new TipObj();
   const sftp = new Client();
 
-  let answerRes = null;
-  answerRes = await inquirer.prompt([
+  /**
+   * 泄露确认
+   */
+  const confirmRes = await inquirer.prompt([
     {
       type: 'confirm',
       name: 'uploadConfirm',
@@ -46,32 +48,51 @@ export async function upload(uploadConfigPath: string) {
       default: false,
     }
   ]);
-  if (answerRes.uploadConfirm === false) {
+  if (confirmRes.uploadConfirm === false) {
     return;
   }
 
-
-  let uploadConfig = null;
+  let uploadConfigArray: Array<IUploadConfig> = null;
+  let uploadConfig: IUploadConfig = null;
   try {
-    // upload.json require是否有误
-    uploadConfig = require(uploadConfigPath);
+    // 正确引入upload.js
+    uploadConfigArray = require(uploadConfigPath)['serverArray'];
   } catch (error) {
     tip.fail(error.message);
     return;
   }
+
+  /**
+   * 环境选择
+   */
+  const envRes = await inquirer.prompt([
+    {
+      type: "list",
+      name: "envName",
+      message: chalk.blueBright('请选择环境：'),
+      choices: uploadConfigArray.map(item => item.name),
+    },
+  ]);
+
+  uploadConfig = uploadConfigArray.find(item => item.name === envRes['envName']);
+
+
 
   try {
     // uploadJson格式校验
     const formatRight = validateUpload(uploadConfig);
     if (formatRight === false) {
-      throw new Error(`upload.json格式错误`);
+      throw new Error(`服务器信息配置有误`);
     }
   } catch (error) {
     tip.fail(error.message);
     log(chalk.greenBright('upload.json格式示例: '));
+    // TODO 到时贴github链接
     log(JSON.stringify(RIGHT_CONFIG, null, 2));
     return;
   }
+
+
 
   const sourcePath = uploadConfig.sourcePath;
   const targetPath = uploadConfig.targetPath;

@@ -1,11 +1,15 @@
 export interface IUploadConfig {
-  sourcePath: string; // 资源路径
-  targetPath: string; // 目标路径
+  name: string;//环境名称
+  sourcePath: string; //源文件路径，如: ./dist
+  targetPath: string; //服务器目标路径，如: /var/XXX/
   targetServer: {
-    // 目标主机信息
-    host: string;
-    port: number;
-    username: string;
-    password: string;
+    host: string; //目标服务器IP地址
+    port: number;  //端口号，sftp默认为22
+    username: string;  //用户名
+    password: string;  //密码
   };
+}
+
+export interface IConfigFile {
+  serverArray: Array<IUploadConfig>
 }

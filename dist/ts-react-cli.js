@@ -35,6 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const path_1 = __importDefault(require("path"));
 const basic_1 = require("./util/basic");
+const constants_1 = require("./constants");
 const version = require("../package.json").version;
 commander_1.program.version(version, "-v, --version");
 commander_1.program
@@ -67,7 +68,7 @@ commander_1.program
     .description("上传至SFTP服务器")
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
     const cwd = process.cwd();
-    const configPath = path_1.default.join(cwd, "upload.json");
+    const configPath = path_1.default.join(cwd, constants_1.UPLOAD_NAME);
     const { upload } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/upload")));
     upload(configPath);
 }));

@@ -2,6 +2,7 @@
 import { program } from "commander";
 import path from "path";
 import { parseCmd } from "./util/basic";
+import { UPLOAD_NAME } from "./constants";
 
 const version = require("../package.json").version;
 
@@ -43,7 +44,7 @@ program
   .description("上传至SFTP服务器")
   .action(async () => {
     const cwd = process.cwd()
-    const configPath = path.join(cwd, "upload.json");
+    const configPath = path.join(cwd, UPLOAD_NAME);
 
     const { upload } = await import("./cli-commands/upload");
     upload(configPath);

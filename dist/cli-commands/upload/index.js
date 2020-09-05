@@ -47,8 +47,10 @@ function upload(uploadConfigPath) {
     return __awaiter(this, void 0, void 0, function* () {
         const tip = new util_1.TipObj();
         const sftp = new ssh2_sftp_client_1.default();
-        let answerRes = null;
-        answerRes = yield inquirer_1.default.prompt([
+        /**
+         * 泄露确认
+         */
+        const confirmRes = yield inquirer_1.default.prompt([
             {
                 type: 'confirm',
                 name: 'uploadConfirm',
@@ -56,28 +58,42 @@ function upload(uploadConfigPath) {
                 default: false,
             }
         ]);
-        if (answerRes.uploadConfirm === false) {
+        if (confirmRes.uploadConfirm === false) {
             return;
         }
+        let uploadConfigArray = null;
         let uploadConfig = null;
         try {
-            // upload.json require是否有误
-            uploadConfig = require(uploadConfigPath);
+            // 正确引入upload.js
+            uploadConfigArray = require(uploadConfigPath)['serverArray'];
         }
         catch (error) {
             tip.fail(error.message);
             return;
         }
+        /**
+         * 环境选择
+         */
+        const envRes = yield inquirer_1.default.prompt([
+            {
+                type: "list",
+                name: "envName",
+                message: chalk_1.default.blueBright('请选择环境：'),
+                choices: uploadConfigArray.map(item => item.name),
+            },
+        ]);
+        uploadConfig = uploadConfigArray.find(item => item.name === envRes['envName']);
         try {
             // uploadJson格式校验
             const formatRight = validateUpload(uploadConfig);
             if (formatRight === false) {
-                throw new Error(`upload.json格式错误`);
+                throw new Error(`服务器信息配置有误`);
             }
         }
         catch (error) {
             tip.fail(error.message);
             log(chalk_1.default.greenBright('upload.json格式示例: '));
+            // TODO 到时贴github链接
             log(JSON.stringify(constants_1.RIGHT_CONFIG, null, 2));
             return;
         }
