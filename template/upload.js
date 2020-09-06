@@ -4,6 +4,7 @@
  * 注意！请注意防止敏感信息外泄！.gitignore已添加upload.js，防止upload.js提交到github上！
  */
 
+// eslint-disable-next-line no-undef
 module.exports = {
     // 环境数组
     serverArray: [
