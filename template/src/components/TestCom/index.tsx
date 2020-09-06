@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import './index.css';
 import testBigImg from '../../source/img/test-big.jpg';
 import testJson from '../../source/json/test.json';
 import testSmallImg from '../../source/img/test-small.png';
@@ -9,10 +8,11 @@ const TestCom: React.FC<any> = function () {
   const [number, setNumber] = useState<number>(0);
   return (
     <div>
-      <h1>字体包引用、CSS autoprefixer自动添加前缀、CSS Module测试</h1>
-      <p id='test-p' className={styles.test}>
-        字体包、CSS autoprefixer、CSS Module
+      <h1>CSS autoprefixer自动添加前缀、CSS Module测试</h1>
+      <p className={styles.test}>
+        CSS autoprefixer、CSS Module
       </p>
+      <i>由于字体包较占用空间，所以此处未作字体包测试，开发者可有需要可尝试</i>
       <hr />
 
       <h1>大图路径测试</h1>
