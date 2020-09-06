@@ -9,5 +9,5 @@
     "noUnusedLocals": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "template"]
+  "exclude": ["node_modules", "template", "playground"]
 }
