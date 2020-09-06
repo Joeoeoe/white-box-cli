@@ -40,7 +40,7 @@ const version = require("../package.json").version;
 commander_1.program.version(version, "-v, --version");
 commander_1.program
     .command("init <app-name>")
-    .description("使用 ts-react-cli 初始化项目")
+    .description("使用 white-box-cli 初始化项目")
     .action((name) => __awaiter(void 0, void 0, void 0, function* () {
     const { init } = yield Promise.resolve().then(() => __importStar(require("./cli-commands/init")));
     init(name);

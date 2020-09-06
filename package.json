@@ -1,10 +1,10 @@
 {
   "name": "white-box-cli",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "ts-react项目脚手架，配置白盒，适合个人项目及小型团队",
   "main": "index.js",
   "bin": {
-    "ts-react-cli": "bin/index.js"
+    "white-box-cli": "bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,13 +27,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Joeoeoe/ts-react-cli.git"
+    "url": "git+https://github.com/Joeoeoe/white-box-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/Joeoeoe/ts-react-cli/issues"
+    "url": "https://github.com/Joeoeoe/white-box-cli/issues"
   },
-  "homepage": "https://github.com/Joeoeoe/ts-react-cli#readme",
+  "homepage": "https://github.com/Joeoeoe/white-box-cli#readme",
   "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/node": "^14.6.4",
     "@types/ssh2-sftp-client": "^5.2.0",
     "@types/webpack": "^4.41.21",
     "typescript": "^4.0.2",

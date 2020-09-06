@@ -10,7 +10,7 @@ program.version(version, "-v, --version");
 
 program
   .command("init <app-name>")
-  .description("使用 ts-react-cli 初始化项目")
+  .description("使用 white-box-cli 初始化项目")
   .action(async (name: string) => {
     const { init } = await import("./cli-commands/init");
     init(name);

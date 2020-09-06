@@ -112,7 +112,7 @@ function upload(optionObj, uploadConfigPath) {
         catch (error) {
             log();
             tip.fail(chalk_1.default.redBright(error.message));
-            log(`upload.js格式示例: ${chalk_1.default.blueBright('https://github.com/Joeoeoe/ts-react-cli/blob/master/template/upload.js')}`);
+            log(`upload.js格式示例: ${chalk_1.default.blueBright('https://github.com/Joeoeoe/white-box-cli/blob/master/template/upload.js')}`);
             return;
         }
         if (optionObj['build']) {

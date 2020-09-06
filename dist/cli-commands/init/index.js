@@ -77,7 +77,7 @@ function init(name) {
         log(`  ${chalk_1.default.greenBright("cd")} ${name}`);
         log(`  npm i`);
         log(`  npm run dev`);
-        log(chalk_1.default.blue(`更多帮助请使用 ts-react-cli --help 或者 npx ts-react-cli --help 查看`));
+        log(chalk_1.default.blue(`更多帮助请使用 white-box-cli --help 或者 npx white-box-cli --help 查看`));
     }));
 }
 exports.init = init;

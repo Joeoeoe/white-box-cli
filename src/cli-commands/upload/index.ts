@@ -85,7 +85,7 @@ export async function upload(optionObj, uploadConfigPath: string) {
   } catch (error) {
     log()
     tip.fail(chalk.redBright(error.message));
-    log(`upload.js格式示例: ${chalk.blueBright('https://github.com/Joeoeoe/ts-react-cli/blob/master/template/upload.js')}`);
+    log(`upload.js格式示例: ${chalk.blueBright('https://github.com/Joeoeoe/white-box-cli/blob/master/template/upload.js')}`);
     return;
   }
 
