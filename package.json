@@ -1,6 +1,6 @@
 {
   "name": "white-box-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ts-react项目脚手架，配置白盒，适合个人项目及小型团队",
   "main": "index.js",
   "bin": {
