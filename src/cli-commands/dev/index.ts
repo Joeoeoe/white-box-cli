@@ -14,17 +14,17 @@ export function dev(cliOption, devWebpackPath: string) {
   // 配置来源：webpack.dev.js与脚手架输入及部分默认
   // 对于各配置，优先级为  默认 < dev.js配置 < cli输入
   const config = require(devWebpackPath);
-  const devServerPbj = Object.assign(
+  const devServerObj = Object.assign(
     DEV_SERVER_DEFAULT,
     config.devServer,
     cliOption
   );
-  config.devServer = devServerPbj;
+  config.devServer = devServerObj;
 
   // 端口
-  const port = devServerPbj["port"];
+  const port = devServerObj["port"];
 
-  WebpackDevServer.addDevServerEntrypoints(config, devServerPbj);
+  WebpackDevServer.addDevServerEntrypoints(config, devServerObj);
   const compiler = Webpack(config);
   compiler.hooks.done.tap("done", () => {
     log();
@@ -36,7 +36,7 @@ export function dev(cliOption, devWebpackPath: string) {
     tip.fail(error.message);
   })
 
-  const server = new WebpackDevServer(compiler, devServerPbj);
+  const server = new WebpackDevServer(compiler, devServerObj);
 
   server.listen(port, "127.0.0.1", () => {
     console.log(`Starting server on http://localhost:${port}`);
