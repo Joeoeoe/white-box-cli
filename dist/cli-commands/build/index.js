@@ -18,8 +18,12 @@ const util_1 = require("../../util");
 const webpackPromise = function (config) {
     return new Promise((resolve, reject) => {
         webpack_1.default(config, (err, stats) => {
-            if (err || stats.hasErrors()) {
+            if (err) {
                 reject(err);
+            }
+            if (stats.hasErrors()) {
+                const info = stats.toJson();
+                reject(info.errors);
             }
             resolve(true);
         });
@@ -31,15 +35,15 @@ function build(path) {
         const config = require(path);
         let buildRes = null;
         try {
-            tip.loading('打包中');
+            tip.loading("打包中");
             buildRes = yield webpackPromise(config);
         }
         catch (error) {
-            tip.fail(error.message);
+            tip.fail(error.message || error[0]);
             return false;
         }
         if (buildRes === true) {
-            tip.success('打包成功!');
+            tip.success("打包成功!");
         }
         return true;
     });

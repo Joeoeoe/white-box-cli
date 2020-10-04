@@ -10,11 +10,11 @@ module.exports = merge.smart(commonWebpack, {
     rules: [
       // css与css module处理
       {
-        test: /\.css$/,
+        test: /\.(c|le)ss$/,
         // 匹配.css或.module.css
         oneOf: [
           {
-            test: /\.module\.css/,
+            test: /\.module\.(le|c)ss/,
             use: [
               // {
               //   loader: "style-loader"//把<style></style>标签放在DOM中
