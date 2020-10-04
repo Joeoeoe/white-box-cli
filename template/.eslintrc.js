@@ -1,4 +1,3 @@
-const format = require('prettier-eslint');
 module.exports = {
   parser: '@typescript-eslint/parser',
   env: {
@@ -37,7 +36,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'prettier/prettier': 'error', // 设置提醒类型
+    'prettier/prettier': 'error', // 配合eslint-plugin-prettier，设置提醒类型， 使.prettierc.js整合到eslint，prettier-eslint可以把prettier的format整合到 eslint --fix中
     'react/prop-types': 'off', // 有ts了，不需要react proptypes
     '@typescript-eslint/no-explicit-any': 'off',
   },
