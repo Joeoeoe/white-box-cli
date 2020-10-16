@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const commonWebpack = require('./webpack.common');
+const path = require('path');
 
 module.exports = merge.smart(commonWebpack, {
   mode: 'development',
@@ -41,6 +42,11 @@ module.exports = merge.smart(commonWebpack, {
               },
               {
                 loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    config: path.resolve(__dirname, './postcss.config.js'),
+                  },
+                },
               },
             ],
           },
@@ -60,6 +66,11 @@ module.exports = merge.smart(commonWebpack, {
               },
               {
                 loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    config: path.resolve(__dirname, './postcss.config.js'),
+                  },
+                },
               },
             ],
           },
@@ -73,6 +84,6 @@ module.exports = merge.smart(commonWebpack, {
     host: 'localhost',
     port: 8080,
     historyApiFallback: true, // 404跳转至index.html
-    proxy: {},//代理配置
+    proxy: {}, //代理配置
   },
 });

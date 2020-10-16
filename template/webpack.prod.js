@@ -36,6 +36,11 @@ module.exports = merge.smart(commonWebpack, {
               },
               {
                 loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    config: path.resolve(__dirname, './postcss.config.js'),
+                  },
+                },
               },
             ],
           },
@@ -55,6 +60,11 @@ module.exports = merge.smart(commonWebpack, {
               },
               {
                 loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    config: path.resolve(__dirname, './postcss.config.js'),
+                  },
+                },
               },
             ],
           },
